@@ -51,14 +51,14 @@ round-avatar: true
 social-network-links:
   email: "someone@example.com"
   rss: true  # remove this line if you don't want to show an RSS link at the bottom
-  facebook: LizardByte
+  facebook: LizardByteDev
   github: LizardByte
-  twitter: LizardByteDev
   patreon: LizardByte
-  youtube: "@LizardByte"
+  reddit: r/LizardByte  # yourname or r/yoursubreddit
+  twitter: LizardByteDev
+  youtube: "@LizardByteDev"
 #  whatsapp: 4159998888
 #  medium: yourname
-#  reddit: yourname or r/yoursubreddit
 #  linkedin: yourname
 #  xing: yourname
 #  stackoverflow: "yourId/yourname"
