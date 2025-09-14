@@ -32,10 +32,26 @@
               <h2 class="{{ include.type }}-subheading">{{ page.subtitle | strip_html }}</h2>
             {% endif %}
           {% endif %}
-          
-          {% if include.type == "post" %} 
-            {% if page.author %}
-              By <strong>{{ page.author | strip_html }}</strong><br>
+
+          {% if include.type == "post" %}
+            {% if page.authors %}
+              By
+              {% for author in page.authors %}
+                {% if author.github %}
+                  <a href="https://github.com/{{ author.github }}" target="_blank" rel="noopener noreferrer" class="post-author-link">
+                    <img src="https://github.com/{{ author.github }}.png?size=40" alt="{{ author.name | default: author.github }}" class="post-author-avatar">
+                  </a>
+                {% endif %}
+                <strong>
+                  {% if author.github %}
+                    <a href="https://github.com/{{ author.github }}" target="_blank" rel="noopener noreferrer" class="post-author-link">
+                      {{ author.name | default: author.github | strip_html }}
+                    </a>
+                  {% else %}
+                    {{ author.name | strip_html }}
+                  {% endif %}
+                </strong>{% unless forloop.last %}{% if forloop.index == page.authors.size | minus: 1 %} and {% else %}, {% endif %}{% endunless %}
+              {% endfor %}<br>
             {% endif%}
             <span class="post-meta">Posted on {{ page.date | date: date_format }}</span>
             {% if page.last-updated %}
