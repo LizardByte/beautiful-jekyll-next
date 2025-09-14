@@ -1157,3 +1157,12 @@ pre {
   text-decoration: none;
   color: inherit;
 }
+
+/* GitHub badge styles */
+.github-badge {
+  text-decoration: none !important;
+}
+
+.github-badge:hover {
+  text-decoration: none !important;
+}

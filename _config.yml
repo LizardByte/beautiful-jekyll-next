@@ -91,6 +91,17 @@ rss-description: This website is a virtual proof that I'm awesome
 # --- General options --- #
 ###########################
 
+# Select a badge style to show in posts
+# valid choices are:
+# - 'ghbtns:small'  # (beautiful-jekyll default), https://ghbtns.com/
+# - 'ghbtns:large'
+# - 'shields:flat'
+# - 'shields:flat-square'
+# - 'shields:plastic'
+# - 'shields:for-the-badge'  # default value if not set
+# - 'shields:social'
+post-badge-style: 'shields:for-the-badge'
+
 # Select which social network share links to show in posts
 share-links-active:
   twitter: true
