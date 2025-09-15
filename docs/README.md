@@ -1,6 +1,13 @@
-# Beautiful Jekyll
+<div align="center">
+  <img src="banner.png" />
+  <h1 align="center">Beautiful Jekyll Next</h1>
+  <h4 align="center">Create a beautiful website.</h4>
+</div>
 
-[![Gem Version](https://badge.fury.io/rb/beautiful-jekyll-theme.svg)](https://badge.fury.io/rb/beautiful-jekyll-theme)
+<div align="center">
+  <a href="https://github.com/LizardByte/beautiful-jekyll-next"><img src="https://img.shields.io/github/stars/lizardbyte/beautiful-jekyll-next.svg?logo=github&style=for-the-badge" alt="GitHub stars"></a>
+  <a href="https://github.com/LizardByte/beautiful-jekyll-next/actions/workflows/ci.yml?query=branch%3Amaster"><img src="https://img.shields.io/github/actions/workflow/status/lizardbyte/beautiful-jekyll-next/ci.yml.svg?branch=master&label=CI%20build&logo=github&style=for-the-badge" alt="GitHub Workflow Status (CI)"></a>
+</div>
 
 ## Demos:
 
@@ -8,8 +15,19 @@
 - [LizardByte/beautiful-jekyll-next](https://app.lizardbyte.dev/beautiful-jekyll-next/)
 - [LizardByte/Sunshine](https://app.lizardbyte.dev/Sunshine/)
 
-**Beautiful Jekyll** is a ready-to-use template to help you create a beautiful website quickly.
+**Beautiful Jekyll Next** is a ready-to-use template to help you create a beautiful website quickly.
 Perfect for personal sites, blogs, or simple project websites.
+
+This is a fork of [Beautiful Jekyll](https://github.com/daattali/beautiful-jekyll), with customizations to make it more
+suitable for my needs such as the following:
+
+- Newer version of Bootstrap
+- Added author avatars for blog posts
+- Allow custom styling for giscus comments
+- Added different styles for GitHub badges on blog posts
+- Pull Request builds can be previewed before merging, making it easier to review changes between versions
+
+For a full list of differences, see https://github.com/daattali/beautiful-jekyll/compare/master...LizardByte:master
 
 ## Table of contents
 
@@ -23,12 +41,11 @@ Perfect for personal sites, blogs, or simple project websites.
 
 # Features
 
-- **SIMPLE**: The primary goal of Beautiful Jekyll is to allow literally *anyone* to create a website in a few minutes.
+- **SIMPLE**: The primary goal of Beautiful Jekyll Next is to allow *anyone* to create a website in a few minutes.
 - **Modern**: Uses the latest best practices and technologies to achieve nearly perfect scores on Google Chrome's Audit.
 - **Mobile-first**: Designed to look great on both large-screen and small-screen (mobile) devices.
 - **Highly customizable**: Many personalization settings such as changing the background color/image, adding a logo.
-- **Flexible usage**: Use Beautiful Jekyll directly on GitHub or via a Ruby gem.
-  Choose the best [development method](#build-your-website-in-3-steps) for you.
+- **Flexible usage**: Use Beautiful Jekyll Next directly on GitHub or via a Ruby gem. (TODO: create a Ruby gem)
 - **SEO and social media support**: Customize how your site looks on Google and when shared on social media.
 - **Comments support**: Add comments to any page using either
   [Disqus](https://disqus.com/),
@@ -41,7 +58,7 @@ Perfect for personal sites, blogs, or simple project websites.
 - **Analytics**: Integrate Google Analytics, or other analytics platforms, to track visits to your website.
 - **Search**: Let users easily find any page using a Search button in the navigation bar.
 - **Photos support**: Any page can have a full-width cover photo and thumbnail.
-- **RSS**: An RSS feed is automatically created, so you can even host a podcast easily with Beautiful Jekyll.
+- **RSS**: An RSS feed is automatically created, so you can even host a podcast easily with Beautiful Jekyll Next.
 
 # Usage
 
@@ -55,9 +72,9 @@ This theme is recommended to be installed as a remote theme, so you can easily u
 remote_theme: LizardByte/beautiful-jekyll-next
 ```
 
-## Specific commit
+## Specific branch, commit, or tag
 ```yaml
-remote_theme: LizardByte/beautiful-jekyll-next@
+remote_theme: LizardByte/beautiful-jekyll-next@master
 ```
 
 # Add your own content
@@ -67,18 +84,18 @@ It's much easier to write Markdown than HTML,
 so that's the recommended approach ([here's a great tutorial](https://markdowntutorial.com/)
 if you need to learn Markdown in 5 minutes).
 
-To see an example of a Markdown file, click on any file that ends in `.md`, for example [`aboutme.md`](./aboutme.md).
+To see an example of a Markdown file, click on any file that ends in `.md`, for example [`aboutme.md`](../aboutme.md).
 On that page you can see some nicely formatted text (there's a word in bold, a link, a few bullet points).
 If you click on the `code` button, you'll see the Markdown code that generated the pretty text.
 
-In contrast, look at [`tags.html`](./tags.html). That's how you write HTML... not as pretty.
+In contrast, look at [`tags.html`](../tags.html). That's how you write HTML... not as pretty.
 So stick with Markdown if you don't know HTML.
 
 Any Markdown or HTML file that you create will be available on your website under
 `https://<yourusername>.github.io/<pagename>`. For example, if you create a file `about.md` (or `about.html`)
 then it'll exist at `https://<yourusername>.github.io/about`.
 
-Files you create inside the [`_posts`](./_posts) directory will be treated as blog entries.
+Files you create inside the [`_posts`](../_posts) directory will be treated as blog entries.
 You can look at the existing files there to get an idea of how to write blog posts.
 Note the format of the blog post files... they must follow the naming convention of `YEAR-MONTH-DAY-title.md`.
 
@@ -105,17 +122,17 @@ subtitle: Here you'll find all the ways to get in touch with me
 ```
 
 If you don't want to use any parameters on a page, you still need to use the two dashed lines.
-If you don't, then your file will be shown as-is without the Beautiful Jekyll template.
+If you don't, then your file will be shown as-is without the Beautiful Jekyll Next template.
 
 You can look at the top of
-[`aboutme.md`](https://raw.githubusercontent.com/LizardByte/beautiful-jekyll-next/master/aboutme.md) as an example.
+[`aboutme.md`](../aboutme.md) as an example.
 
 **Important takeaway: ALWAYS add the YAML front matter, which is two lines of three dashes, to EVERY page.
 If you have any parameters, they go between the two lines.**
 
 # Supported parameters
 
-Below is a list of the parameters that Beautiful Jekyll supports
+Below is a list of the parameters that Beautiful Jekyll Next supports
 (any of these can be added to the YAML front matter of any page). Remember to also look in the `_config.yml` file to
 see additional site-wide settings. If there's a parameter that you want to apply to the entire site instead of one
 specific page, check out [this FAQ answer](https://beautifuljekyll.com/faq/#default-params).
@@ -205,7 +222,7 @@ Congratulations on making it this far! You now have all the tools to easily buil
 - Since this is a fork of Beautiful Jekyll, you may want to check out [Beautiful-Jekyll](https://beautifuljekyll.com)
   to learn more about the features of Beautiful Jekyll.
 
-- Remember that Beautiful Jekyll is built on top of Jekyll.
+- Remember that Beautiful Jekyll Next is built on top of Jekyll.
   This means that reading through the [Jekyll documentation](https://jekyllrb.com/) will introduce you to many more
   features that you might find useful!
 
