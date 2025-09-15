@@ -793,6 +793,15 @@ nav.top-nav-short-permanent ~ header > .intro-header.big-img {
     margin-bottom: 0.3125rem;
   }
 }
+#header-gh-btns object {
+    outline: none;
+    border: none;
+}
+#header-gh-btns object:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
 
 /* --- Pagination --- */
 
@@ -1156,13 +1165,4 @@ pre {
 .post-author-link {
   text-decoration: none;
   color: inherit;
-}
-
-/* GitHub badge styles */
-.github-badge {
-  text-decoration: none !important;
-}
-
-.github-badge:hover {
-  text-decoration: none !important;
 }
