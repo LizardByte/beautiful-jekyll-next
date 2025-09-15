@@ -302,13 +302,11 @@ defaults:
 
 # Exclude these files from the production site
 exclude:
-  - CHANGELOG.md
   - CNAME
   - Gemfile
   - Gemfile.lock
   - LICENSE
   - README.md
-  - screenshot.png
   - docs/
   - scripts/
 

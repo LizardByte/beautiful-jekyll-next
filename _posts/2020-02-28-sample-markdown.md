@@ -34,11 +34,11 @@ When \\(a \ne 0\\), there are two solutions to \\(ax^2 + bx + c = 0\\) and they 
 
 How about a yummy crepe?
 
-![Crepe](https://beautifuljekyll.com/assets/img/crepe.jpg)
+![Crepe](https://app.lizardbyte.dev/beautiful-jekyll-next/assets/img/crepe.jpg)
 
 It can also be centered!
 
-![Crepe](https://beautifuljekyll.com/assets/img/crepe.jpg){: .mx-auto.d-block :}
+![Crepe](https://app.lizardbyte.dev/beautiful-jekyll-next/assets/img/crepe.jpg){: .mx-auto.d-block :}
 
 Here's a code chunk:
 
