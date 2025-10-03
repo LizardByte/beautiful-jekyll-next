@@ -14,6 +14,12 @@ layout: base
         {% assign gh_repo = gh_split[1] %}
 
         <div id="header-gh-btns">
+          {% if site.hit-counter %}
+            <img
+                src="https://hitscounter.dev/api/hit?url={{ page.url | absolute_url | url_encode }}&label={{ site.hit-counter.label | default: 'hits' | url_encode }}&icon={{ site.hit-counter.icon | default: 'graph-up-arrow' | url_encode }}&color={{ site.hit-counter.color | default: '#198754' | url_encode }}&message=&style={{ site.hit-counter.style | default: 'for-the-badge' | url-encode }}&tz={{ site.hit-counter.tz | default: 'UTC' | url_encode }}"
+                alt="{{ site.hit-counter.label | default: 'hits' }}"
+            >
+          {% endif %}
           {% if page.gh-badge.size > 0 %}
             {% assign post_badge_split = page.post-badge-style | default: site.post-badge-style | default: 'shields:for-the-badge' | split: ':' %}
             {% assign post_badge_source = post_badge_split[0] %}
