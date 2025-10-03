@@ -102,6 +102,15 @@ rss-description: This website is a virtual proof that I'm awesome
 # - 'shields:social'
 post-badge-style: 'shields:for-the-badge'
 
+# Hit counter options, see: https://hitscounter.dev/
+hit-counter:
+  enabled: true
+  color: '#198754'
+  icon: 'graph-up-arrow'
+  label: 'hits'
+  style: 'for-the-badge'
+  tz: 'UTC'
+
 # Select which social network share links to show in posts
 share-links-active:
   twitter: true

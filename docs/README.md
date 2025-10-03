@@ -24,6 +24,7 @@ suitable for my needs such as the following:
 - Newer version of Bootstrap
 - Added author avatars for blog posts
 - Allow custom styling for giscus comments
+- Added optional hit counter for blog posts
 - Added different styles for GitHub badges on blog posts
 - Pull Request builds can be previewed before merging, making it easier to review changes between versions
 
