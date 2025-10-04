@@ -14,72 +14,47 @@ layout: base
         {% assign gh_repo = gh_split[1] %}
 
         <div id="header-gh-btns">
+          {% include badge-setup.html %}
+
           {% unless site.hit-counter == false %}
             <a href="https://hitscounter.dev/history?url={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">
               <img
-                  src="https://hitscounter.dev/api/hit?url={{ page.url | absolute_url | url_encode }}&label={{ site.hit-counter.label | default: 'hits' | url_encode }}&icon={{ site.hit-counter.icon | default: 'graph-up-arrow' | url_encode }}&color={{ site.hit-counter.color | default: '#198754' | url_encode }}&message=&style={{ site.hit-counter.style | default: 'for-the-badge' | url-encode }}&tz={{ site.hit-counter.tz | default: 'UTC' | url_encode }}"
+                  class="{{ post_badge_source }}-{{ post_badge_size }}"
+                  src="https://hitscounter.dev/api/hit?url={{ page.url | absolute_url | url_encode }}&label={{ site.hit-counter.label | default: 'hits' | url_encode }}&icon={{ site.hit-counter.icon | default: 'graph-up-arrow' | url_encode }}&color={{ site.shields-io.color | default: 'blue' | url_encode }}&message=&style={{ post_badge_style | url-encode }}&tz={{ site.hit-counter.tz | default: 'UTC' | url_encode }}"
                   alt="{{ site.hit-counter.label | default: 'hits' }}"
+                  {% if post_badge_source == 'ghbtns' %}
+                    height="{{ ghbtns_height }}px"
+                  {% endif %}
               >
             </a>
           {% endunless %}
+
           {% if page.gh-badge.size > 0 %}
-            {% assign post_badge_split = page.post-badge-style | default: site.post-badge-style | default: 'shields:for-the-badge' | split: ':' %}
-            {% assign post_badge_source = post_badge_split[0] %}
-            {% assign post_badge_style = post_badge_split[1] %}
-
-            {% if post_badge_source != 'shields' and post_badge_source != 'ghbtns' %}
-              {% assign post_badge_source = 'shields' %}
-            {% endif %}
-
-            {% if post_badge_source == 'ghbtns' %}
-              {% if post_badge_style != 'large' and post_badge_style != 'small' %}
-                {% assign post_badge_style = 'large' %}
-              {% endif %}
-            {% elsif post_badge_source == 'shields' %}
-              {% if post_badge_style != 'for-the-badge' and post_badge_style != 'plastic' and post_badge_style != 'flat' and post_badge_style != 'flat-square' and post_badge_style != 'social' %}
-                {% assign post_badge_style = 'for-the-badge' %}
-              {% endif %}
-            {% endif %}
-
-            {% if post_badge_source == 'ghbtns' && post_badge_style == 'large' %}
-              {% assign ghbtns_size = 'large' %}
-              {% assign ghbtns_height = 30 %}
-              {% assign ghbtns_width_1 = 170 %}
-              {% assign ghbtns_width_2 = 270 %}
-            {% elsif post_badge_source == 'ghbtns' %}
-              {% assign ghbtns_size = 'small' %}
-              {% assign ghbtns_height = 20 %}
-              {% assign ghbtns_width_1 = 120 %}
-              {% assign ghbtns_width_2 = 220 %}
-            {% elsif post_badge_source == 'shields' %}
-              {% assign github_base_url = 'https://github.com/' | append: gh_user %}
-              {% assign github_repo_url = github_base_url | append: '/' | append: gh_repo %}
-            {% endif %}
             {% for badge in page.gh-badge %}
               {% case badge %}
                 {% when 'star'%}
                   {% if post_badge_source == 'ghbtns' %}
                     <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=star&count=true&size={{ ghbtns_size }}" width="{{ ghbtns_width_1 }}px" height="{{ ghbtns_height }}px" title="GitHub Repo stars"></iframe>
                   {% elsif post_badge_source == 'shields' %}
-                    <object data="https://img.shields.io/github/stars/{{ gh_user }}/{{ gh_repo }}?style={{ post_badge_style }}&logo=github&link={{ github_repo_url | url_encode }}&link={{ github_repo_url | append: '/stargazers' | url_encode }}" type="image/svg+xml" title="GitHub Repo stars">GitHub Repo stars</object>
+                    <object data="https://img.shields.io/github/stars/{{ gh_user }}/{{ gh_repo }}?color={{ post_badge_color }}&style={{ post_badge_style }}&logo=github&link={{ github_repo_url | url_encode }}&link={{ github_repo_url | append: '/stargazers' | url_encode }}" type="image/svg+xml" title="GitHub Repo stars">GitHub Repo stars</object>
                   {% endif %}
                 {% when 'watch'%}
                   {% if post_badge_source == 'ghbtns' %}
                     <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=watch&v=2&count=true&size={{ ghbtns_size }}" width="{{ ghbtns_width_1 }}px" height="{{ ghbtns_height }}px" title="GitHub watchers"></iframe>
                   {% elsif post_badge_source == 'shields' %}
-                    <object data="https://img.shields.io/github/watchers/{{ gh_user }}/{{ gh_repo }}?style={{ post_badge_style }}&logo=github&link={{ github_repo_url | url_encode }}&link={{ github_repo_url | append: '/watchers' | url_encode }}" type="image/svg+xml" title="GitHub watchers">GitHub watchers</object>
+                    <object data="https://img.shields.io/github/watchers/{{ gh_user }}/{{ gh_repo }}?color={{ post_badge_color }}&style={{ post_badge_style }}&logo=github&link={{ github_repo_url | url_encode }}&link={{ github_repo_url | append: '/watchers' | url_encode }}" type="image/svg+xml" title="GitHub watchers">GitHub watchers</object>
                   {% endif %}
                 {% when 'fork'%}
                   {% if post_badge_source == 'ghbtns' %}
                     <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=fork&count=true&size={{ ghbtns_size }}" width="{{ ghbtns_width_1 }}px" height="{{ ghbtns_height }}px" title="GitHub forks"></iframe>
                   {% elsif post_badge_source == 'shields' %}
-                    <object data="https://img.shields.io/github/forks/{{ gh_user }}/{{ gh_repo }}?style={{ post_badge_style }}&logo=github&link={{ github_repo_url | append: '/fork' | url_encode }}&link={{ github_repo_url | append: '/forks' | url_encode }}" type="image/svg+xml" title="GitHub forks">GitHub forks</object>
+                    <object data="https://img.shields.io/github/forks/{{ gh_user }}/{{ gh_repo }}?color={{ post_badge_color }}&style={{ post_badge_style }}&logo=github&link={{ github_repo_url | append: '/fork' | url_encode }}&link={{ github_repo_url | append: '/forks' | url_encode }}" type="image/svg+xml" title="GitHub forks">GitHub forks</object>
                   {% endif %}
                 {% when 'follow'%}
                   {% if post_badge_source == 'ghbtns' %}
                     <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&type=follow&count=true&size={{ ghbtns_size }}" width="{{ ghbtns_width_2 }}px" height="{{ ghbtns_height }}px" title="GitHub followers"></iframe>
                   {% elsif post_badge_source == 'shields' %}
-                    <object data="https://img.shields.io/github/followers/{{ gh_user }}?style={{ post_badge_style }}&logo=github&link={{ github_base_url | url_encode }}&link={{ github_base_url | append: '?tab=followers' | url_encode }}" type="image/svg+xml" title="GitHub followers">GitHub followers</object>
+                    <object data="https://img.shields.io/github/followers/{{ gh_user }}?color={{ post_badge_color }}&style={{ post_badge_style }}&logo=github&link={{ github_base_url | url_encode }}&link={{ github_base_url | append: '?tab=followers' | url_encode }}" type="image/svg+xml" title="GitHub followers">GitHub followers</object>
                   {% endif %}
               {% endcase %}
             {% endfor %}

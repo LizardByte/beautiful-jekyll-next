@@ -1,0 +1,31 @@
+{% assign post_badge_split = page.post-badge-style | default: site.post-badge-style | default: 'shields' | split: ':' %}
+{% assign post_badge_source = post_badge_split[0] %}
+{% assign post_badge_size = post_badge_split[1] %}
+
+{% if post_badge_source != 'shields' and post_badge_source != 'ghbtns' %}
+  {% assign post_badge_source = 'shields' %}
+{% endif %}
+
+{% if post_badge_source == 'ghbtns' %}
+  {% assign post_badge_style = 'social' %}
+  {% if post_badge_size != 'large' and post_badge_size != 'small' %}
+    {% assign post_badge_size = 'large' %}
+  {% endif %}
+{% endif %}
+
+{% if post_badge_source == 'ghbtns' && post_badge_size == 'large' %}
+  {% assign ghbtns_size = 'large' %}
+  {% assign ghbtns_height = 30 %}
+  {% assign ghbtns_width_1 = 170 %}
+  {% assign ghbtns_width_2 = 270 %}
+{% elsif post_badge_source == 'ghbtns' %}
+  {% assign ghbtns_size = 'small' %}
+  {% assign ghbtns_height = 20 %}
+  {% assign ghbtns_width_1 = 120 %}
+  {% assign ghbtns_width_2 = 220 %}
+{% elsif post_badge_source == 'shields' %}
+  {% assign github_base_url = 'https://github.com/' | append: gh_user %}
+  {% assign github_repo_url = github_base_url | append: '/' | append: gh_repo %}
+  {% assign post_badge_color = site.shields-io.color | default: 'blue' %}
+  {% assign post_badge_style = site.shields-io.style | default: 'for-the-badge' %}
+{% endif %}
