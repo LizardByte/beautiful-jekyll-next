@@ -74,11 +74,16 @@ layout: page
       </p>
 
       <div id="header-gh-btns">
+        {% include badge-setup.html %}
+
         {% unless site.hit-counter == false %}
           <a href="https://hitscounter.dev/history?url={{ post.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">
             <img
-                src="https://hitscounter.dev/api/previewBadge?url={{ post.url | absolute_url | url_encode }}&label={{ site.hit-counter.label | default: 'hits' | url_encode }}&icon={{ site.hit-counter.icon | default: 'graph-up-arrow' | url_encode }}&color={{ site.hit-counter.color | default: '#198754' | url_encode }}&message=&style={{ site.hit-counter.style | default: 'for-the-badge' | url-encode }}&tz={{ site.hit-counter.tz | default: 'UTC' | url_encode }}"
+                src="https://hitscounter.dev/api/previewBadge?url={{ post.url | absolute_url | url_encode }}&label={{ site.hit-counter.label | default: 'hits' | url_encode }}&icon={{ site.hit-counter.icon | default: 'graph-up-arrow' | url_encode }}&color={{ site.shields-io.color | default: 'blue' | url_encode }}&message=&style={{ post_badge_style | url-encode }}&tz={{ site.hit-counter.tz | default: 'UTC' | url_encode }}"
                 alt="{{ site.hit-counter.label | default: 'hits' }}"
+                {% if post_badge_source == 'ghbtns' %}
+                  height="{{ ghbtns_height }}px"
+                {% endif %}
             >
           </a>
         {% endunless %}
