@@ -2,6 +2,7 @@
 layout: post
 title: Sample authors post
 subtitle: This post shows how to use multiple authors
+readtime: true
 gh-repo: LizardByte/beautiful-jekyll-next
 gh-badge: [star, fork, follow]
 tags: [test]
