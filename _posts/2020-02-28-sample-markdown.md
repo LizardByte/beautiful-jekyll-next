@@ -2,6 +2,7 @@
 layout: post
 title: Sample blog post to learn markdown tips
 subtitle: There's lots to learn!
+readtime: true
 gh-repo: LizardByte/beautiful-jekyll-next
 gh-badge: [star, fork, follow]
 tags: [test]
