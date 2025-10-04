@@ -46,9 +46,28 @@ layout: page
         {% endif %}
       </a>
 
-      {% if post.author %}
-        <span>By <strong>{{ post.author | strip_html }}</strong></span>
-      {% endif %}
+      {% if post.authors %}
+        By
+        {% for author in post.authors %}
+          <span class="post-author-container">
+            {% if author.github %}
+              <a href="https://github.com/{{ author.github }}" target="_blank" rel="noopener noreferrer" class="post-author-link">
+                <img src="https://github.com/{{ author.github }}.png?size=40" alt="{{ author.name | default: author.github }}" class="post-author-avatar">
+              </a>
+            {% endif %}
+            <strong>
+              {% if author.github %}
+                <a href="https://github.com/{{ author.github }}" target="_blank" rel="noopener noreferrer" class="post-author-link">
+                  {{ author.name | default: author.github | strip_html }}
+                </a>
+              {% else %}
+                {{ author.name | strip_html }}
+              {% endif %}
+            </strong>
+            {% unless forloop.last %}{% if forloop.index == post.authors.size | minus: 1 %} and {% else %}, {% endif %}{% endunless %}
+          </span>
+        {% endfor %}<br>
+      {% endif%}
       <p class="post-meta">
         {% assign date_format = site.date_format | default: "%B %-d, %Y" %}
         Posted on {{ post.date | date: date_format }}
