@@ -15,10 +15,12 @@ layout: base
 
         <div id="header-gh-btns">
           {% unless site.hit-counter == false %}
-            <img
-                src="https://hitscounter.dev/api/hit?url={{ page.url | absolute_url | url_encode }}&label={{ site.hit-counter.label | default: 'hits' | url_encode }}&icon={{ site.hit-counter.icon | default: 'graph-up-arrow' | url_encode }}&color={{ site.hit-counter.color | default: '#198754' | url_encode }}&message=&style={{ site.hit-counter.style | default: 'for-the-badge' | url-encode }}&tz={{ site.hit-counter.tz | default: 'UTC' | url_encode }}"
-                alt="{{ site.hit-counter.label | default: 'hits' }}"
-            >
+            <a href="https://hitscounter.dev/history?url={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">
+              <img
+                  src="https://hitscounter.dev/api/hit?url={{ page.url | absolute_url | url_encode }}&label={{ site.hit-counter.label | default: 'hits' | url_encode }}&icon={{ site.hit-counter.icon | default: 'graph-up-arrow' | url_encode }}&color={{ site.hit-counter.color | default: '#198754' | url_encode }}&message=&style={{ site.hit-counter.style | default: 'for-the-badge' | url-encode }}&tz={{ site.hit-counter.tz | default: 'UTC' | url_encode }}"
+                  alt="{{ site.hit-counter.label | default: 'hits' }}"
+              >
+            </a>
           {% endunless %}
           {% if page.gh-badge.size > 0 %}
             {% assign post_badge_split = page.post-badge-style | default: site.post-badge-style | default: 'shields:for-the-badge' | split: ':' %}
