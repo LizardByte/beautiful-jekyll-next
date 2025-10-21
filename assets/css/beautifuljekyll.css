@@ -1229,11 +1229,6 @@ pre {
   color: var(--hover-col);
 }
 
-.amazon-affiliate-container .product-description {
-  margin-bottom: 1rem;
-  color: var(--text-col);
-}
-
 .amazon-affiliate-container .product-link {
   display: inline-block;
   padding: 0.5rem 1rem;
