@@ -1,0 +1,159 @@
+{% if site.data.amazon_products and site.data.amazon_products.size > 0 and
+    site.amazon_products.enabled and
+    site.amazon_products.affiliate_tag
+%}
+<div class="amazon-affiliate-container" style="margin: 2rem 0; padding: 1.5rem; background-color: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);">
+  <div style="text-align: center; margin-bottom: 1rem;">
+    <small style="color: #a8aaa8; font-size: 0.85rem;">
+      <em>#CommissionsEarned</em>
+      <em>As an Amazon Associate we earn from qualifying purchases.</em>
+    </small>
+  </div>
+
+  <div id="amazon-product-display">
+    <!-- Product will be inserted here by JavaScript -->
+  </div>
+</div>
+
+<script>
+(function() {
+  // Load products from Jekyll data
+  const allProducts = {{ site.data.amazon_products | jsonify }};
+
+  // Get affiliate tag from site config
+  const affiliateTag = {{ site.amazon_products.affiliate_tag | jsonify }};
+
+  // Get tags from page front matter if available
+  const pageTags = {{ page.amazon_tags | default: page.tags | jsonify }};
+
+  let filteredProducts = allProducts;
+
+  // Filter products by tags if specified
+  if (pageTags && pageTags.length > 0) {
+    filteredProducts = allProducts.filter(product => {
+      if (!product.tags) return false;
+      // Check if any page tag matches any product tag
+      return pageTags.some(pageTag =>
+        product.tags.some(productTag =>
+          productTag.toLowerCase() === pageTag.toLowerCase()
+        )
+      );
+    });
+
+    // If no products match, fall back to all products
+    if (filteredProducts.length === 0) {
+      filteredProducts = allProducts;
+    }
+  }
+
+  let currentProductIndex = -1;
+
+  function getRandomProduct() {
+    if (filteredProducts.length === 0) return null;
+
+    // Get a random index different from the current one if possible
+    let newIndex;
+    if (filteredProducts.length > 1) {
+      do {
+        newIndex = Math.floor(Math.random() * filteredProducts.length);
+      } while (newIndex === currentProductIndex);
+    } else {
+      newIndex = 0;
+    }
+
+    currentProductIndex = newIndex;
+    return filteredProducts[newIndex];
+  }
+
+  function addAffiliateTag(url) {
+    if (!affiliateTag || !url) return url;
+
+    try {
+      const urlObj = new URL(url);
+      urlObj.searchParams.set('tag', affiliateTag);
+      return urlObj.toString();
+    } catch (e) {
+      console.error('Invalid URL:', url);
+      return url;
+    }
+  }
+
+  function displayProduct(product) {
+    if (!product) return;
+
+    const container = document.getElementById('amazon-product-display');
+    if (!container) return;
+
+    // Add affiliate tag to product link
+    const productLink = addAffiliateTag(product.link);
+
+    container.innerHTML = `
+      <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 0 0 auto;">
+          <a href="${productLink}" target="_blank" rel="noopener noreferrer nofollow sponsored">
+            <img src="${product.image}"
+                 alt="${product.name}"
+                 style="max-width: 200px; max-height: 200px; object-fit: contain; border-radius: 4px;">
+          </a>
+        </div>
+        <div style="flex: 1 1 300px;">
+          <h4 style="margin-top: 0; margin-bottom: 0.5rem;">
+            <a href="${productLink}"
+               target="_blank"
+               rel="noopener noreferrer nofollow sponsored"
+               style="text-decoration: none; color: #28a9e6;">
+              ${product.name}
+            </a>
+          </h4>
+          <p style="margin-bottom: 1rem; color: #e4e4e4;">
+            ${product.description}
+          </p>
+          <a href="${productLink}"
+             target="_blank"
+             rel="noopener noreferrer nofollow sponsored"
+             style="display: inline-block; padding: 0.5rem 1rem; background-color: #28a9e6; color: #151515; text-decoration: none; border-radius: 4px; font-weight: 500; transition: background-color 0.3s;">
+            View on Amazon
+          </a>
+          ${product.tags ? `
+            <div style="margin-top: 0.75rem;">
+              <small style="color: #a8aaa8;">
+                ${product.tags.map(tag => `<span style="display: inline-block; padding: 0.2rem 0.5rem; background-color: rgba(255, 255, 255, 0.1); border-radius: 3px; margin-right: 0.3rem; font-size: 0.75rem;">${tag}</span>`).join('')}
+              </small>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }
+
+  // Display initial random product
+  displayProduct(getRandomProduct());
+
+  // Rotate product every 30 seconds
+  setInterval(function() {
+    displayProduct(getRandomProduct());
+  }, 30000); // 30 seconds
+})();
+</script>
+
+<style>
+.amazon-affiliate-container a[href*="amazon.com"]:hover {
+  opacity: 0.85;
+}
+
+.amazon-affiliate-container a[style*="background-color: #28a9e6"]:hover {
+  background-color: #1a8ec9 !important;
+}
+
+@media (max-width: 768px) {
+  .amazon-affiliate-container > div > div {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .amazon-affiliate-container img {
+    margin: 0 auto;
+  }
+}
+</style>
+{% endif %}
