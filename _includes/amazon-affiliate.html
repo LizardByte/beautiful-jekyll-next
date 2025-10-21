@@ -1,10 +1,11 @@
 {% if site.data.amazon_products and site.data.amazon_products.size > 0 and
     site.amazon_products.enabled and
-    site.amazon_products.affiliate_tag
+    site.amazon_products.affiliate_tag and
+    page.amazon_products != false
 %}
-<div class="amazon-affiliate-container" style="margin: 2rem 0; padding: 1.5rem; background-color: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);">
-  <div style="text-align: center; margin-bottom: 1rem;">
-    <small style="color: #a8aaa8; font-size: 0.85rem;">
+<div class="amazon-affiliate-container">
+  <div class="affiliate-disclaimer">
+    <small>
       <em>#CommissionsEarned</em>
       <em>As an Amazon Associate we earn from qualifying purchases.</em>
     </small>
@@ -88,36 +89,26 @@
     const productLink = addAffiliateTag(product.link);
 
     container.innerHTML = `
-      <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
-        <div style="flex: 0 0 auto;">
+      <div class="amazon-product-display">
+        <div class="product-image">
           <a href="${productLink}" target="_blank" rel="noopener noreferrer nofollow sponsored">
-            <img src="${product.image}"
-                 alt="${product.name}"
-                 style="max-width: 200px; max-height: 200px; object-fit: contain; border-radius: 4px;">
+            <img src="${product.image}" alt="${product.name}">
           </a>
         </div>
-        <div style="flex: 1 1 300px;">
-          <h4 style="margin-top: 0; margin-bottom: 0.5rem;">
-            <a href="${productLink}"
-               target="_blank"
-               rel="noopener noreferrer nofollow sponsored"
-               style="text-decoration: none; color: #28a9e6;">
+        <div class="product-details">
+          <h4>
+            <a href="${productLink}" target="_blank" rel="noopener noreferrer nofollow sponsored">
               ${product.name}
             </a>
           </h4>
-          <p style="margin-bottom: 1rem; color: #e4e4e4;">
-            ${product.description}
-          </p>
-          <a href="${productLink}"
-             target="_blank"
-             rel="noopener noreferrer nofollow sponsored"
-             style="display: inline-block; padding: 0.5rem 1rem; background-color: #28a9e6; color: #151515; text-decoration: none; border-radius: 4px; font-weight: 500; transition: background-color 0.3s;">
+          <p class="product-description">${product.description}</p>
+          <a href="${productLink}" target="_blank" rel="noopener noreferrer nofollow sponsored" class="product-link">
             View on Amazon
           </a>
           ${product.tags ? `
-            <div style="margin-top: 0.75rem;">
-              <small style="color: #a8aaa8;">
-                ${product.tags.map(tag => `<span style="display: inline-block; padding: 0.2rem 0.5rem; background-color: rgba(255, 255, 255, 0.1); border-radius: 3px; margin-right: 0.3rem; font-size: 0.75rem;">${tag}</span>`).join('')}
+            <div class="product-tags">
+              <small>
+                ${product.tags.map(tag => `<span class="product-tag">${tag}</span>`).join('')}
               </small>
             </div>
           ` : ''}
@@ -135,25 +126,4 @@
   }, 30000); // 30 seconds
 })();
 </script>
-
-<style>
-.amazon-affiliate-container a[href*="amazon.com"]:hover {
-  opacity: 0.85;
-}
-
-.amazon-affiliate-container a[style*="background-color: #28a9e6"]:hover {
-  background-color: #1a8ec9 !important;
-}
-
-@media (max-width: 768px) {
-  .amazon-affiliate-container > div > div {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .amazon-affiliate-container img {
-    margin: 0 auto;
-  }
-}
-</style>
 {% endif %}
