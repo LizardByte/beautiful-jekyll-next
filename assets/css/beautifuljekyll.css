@@ -1181,6 +1181,7 @@ pre {
   background-color: color-mix(in srgb, var(--navbar-col) 50%, transparent);
   border-radius: 0.5rem;
   border: 1px solid var(--navbar-border-col);
+  position: relative;
 }
 
 .amazon-affiliate-container .affiliate-disclaimer {
@@ -1191,10 +1192,6 @@ pre {
 .amazon-affiliate-container .affiliate-disclaimer small {
   color: var(--mid-col);
   font-size: 0.85rem;
-}
-
-.amazon-affiliate-container {
-  position: relative;
 }
 
 .amazon-affiliate-container .amazon-product-display {
