@@ -46,23 +46,41 @@
     }
   }
 
-  let currentProductIndex = -1;
+  // Shuffle products once at the start for random initial order
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
 
-  function getRandomProduct() {
-    if (filteredProducts.length === 0) return null;
+  // Shuffle products once and keep that order
+  filteredProducts = shuffleArray(filteredProducts);
 
-    // Get a random index different from the current one if possible
-    let newIndex;
-    if (filteredProducts.length > 1) {
-      do {
-        newIndex = Math.floor(Math.random() * filteredProducts.length);
-      } while (newIndex === currentProductIndex);
-    } else {
-      newIndex = 0;
+  let currentProductIndex = 0;
+  let rotationTimer = null;
+
+  function startRotationTimer() {
+    if (rotationTimer) {
+      clearInterval(rotationTimer);
+    }
+    rotationTimer = setInterval(function() {
+      navigateProduct('next');
+    }, 30000); // 30 seconds
+  }
+
+  function navigateProduct(direction) {
+    if (filteredProducts.length === 0) return;
+
+    if (direction === 'next') {
+      currentProductIndex = (currentProductIndex + 1) % filteredProducts.length;
+    } else if (direction === 'prev') {
+      currentProductIndex = (currentProductIndex - 1 + filteredProducts.length) % filteredProducts.length;
     }
 
-    currentProductIndex = newIndex;
-    return filteredProducts[newIndex];
+    displayProduct(filteredProducts[currentProductIndex]);
   }
 
   function addAffiliateTag(url) {
@@ -87,8 +105,18 @@
     // Add affiliate tag to product link
     const productLink = addAffiliateTag(product.link);
 
+    // Show navigation buttons only if there are multiple products
+    const showNavigation = filteredProducts.length > 1;
+
     container.innerHTML = `
       <div class="amazon-product-display">
+        ${showNavigation ? `
+          <button class="product-nav-btn product-nav-prev" aria-label="Previous product">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+        ` : ''}
         <div class="product-image">
           <a href="${productLink}" target="_blank" rel="noopener noreferrer nofollow sponsored">
             <img src="${product.image}" alt="${product.title}">
@@ -111,17 +139,46 @@
             </div>
           ` : ''}
         </div>
+        ${showNavigation ? `
+          <button class="product-nav-btn product-nav-next" aria-label="Next product">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        ` : ''}
       </div>
     `;
+
+    // Add event listeners for navigation buttons
+    if (showNavigation) {
+      const prevBtn = container.querySelector('.product-nav-prev');
+      const nextBtn = container.querySelector('.product-nav-next');
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+          navigateProduct('prev');
+          startRotationTimer(); // Reset timer on manual navigation
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+          navigateProduct('next');
+          startRotationTimer(); // Reset timer on manual navigation
+        });
+      }
+    }
   }
 
-  // Display initial random product
-  displayProduct(getRandomProduct());
+  // Display initial product (first in shuffled array)
+  if (filteredProducts.length > 0) {
+    displayProduct(filteredProducts[currentProductIndex]);
 
-  // Rotate product every 30 seconds
-  setInterval(function() {
-    displayProduct(getRandomProduct());
-  }, 30000); // 30 seconds
+    // Start automatic rotation if there are products
+    if (filteredProducts.length > 1) {
+      startRotationTimer();
+    }
+  }
 })();
 </script>
 {% endif %}

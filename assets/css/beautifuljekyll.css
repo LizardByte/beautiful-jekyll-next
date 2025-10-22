@@ -1198,6 +1198,36 @@ pre {
   gap: 1.5rem;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
+}
+
+.amazon-affiliate-container .product-nav-btn {
+  background-color: var(--link-col);
+  color: var(--page-col);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  flex-shrink: 0;
+}
+
+.amazon-affiliate-container .product-nav-btn:hover {
+  background-color: var(--hover-col);
+  transform: scale(1.1);
+}
+
+.amazon-affiliate-container .product-nav-btn:active {
+  transform: scale(0.95);
+}
+
+.amazon-affiliate-container .product-nav-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .amazon-affiliate-container .product-image {

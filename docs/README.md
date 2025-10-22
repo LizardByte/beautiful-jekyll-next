@@ -27,6 +27,7 @@ suitable for my needs such as the following:
 - Added optional hit counter for blog posts
 - Added different styles for GitHub badges on blog posts
 - Pull Request builds can be previewed before merging, making it easier to review changes between versions
+- Display Amazon products with affiliate links at the end of blog posts
 
 For a full list of differences, see https://github.com/daattali/beautiful-jekyll/compare/master...LizardByte:master
 
