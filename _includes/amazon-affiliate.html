@@ -1,0 +1,184 @@
+{% if site.data.amazon_products and site.data.amazon_products.size > 0 and
+    site.amazon_products.enabled and
+    site.amazon_products.affiliate_tag and
+    page.amazon_products != false
+%}
+<div class="amazon-affiliate-container">
+  <div class="affiliate-disclaimer">
+    <small>
+      <em>#CommissionsEarned | As an Amazon Associate we earn from qualifying purchases.</em>
+    </small>
+  </div>
+
+  <div id="amazon-product-display">
+    <!-- Product will be inserted here by JavaScript -->
+  </div>
+</div>
+
+<script>
+(function() {
+  // Load products from Jekyll data
+  const allProducts = {{ site.data.amazon_products | jsonify }};
+
+  // Get affiliate tag from site config
+  const affiliateTag = {{ site.amazon_products.affiliate_tag | jsonify }};
+
+  // Get tags from page front matter if available
+  const pageTags = {{ page.amazon_tags | default: page.tags | jsonify }};
+
+  let filteredProducts = allProducts;
+
+  // Filter products by tags if specified
+  if (pageTags && pageTags.length > 0) {
+    filteredProducts = allProducts.filter(product => {
+      if (!product.tags) return false;
+      // Check if any page tag matches any product tag
+      return pageTags.some(pageTag =>
+        product.tags.some(productTag =>
+          productTag.toLowerCase() === pageTag.toLowerCase()
+        )
+      );
+    });
+
+    // If no products match, fall back to all products
+    if (filteredProducts.length === 0) {
+      filteredProducts = allProducts;
+    }
+  }
+
+  // Shuffle products once at the start for random initial order
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  // Shuffle products once and keep that order
+  filteredProducts = shuffleArray(filteredProducts);
+
+  let currentProductIndex = 0;
+  let rotationTimer = null;
+
+  function startRotationTimer() {
+    if (rotationTimer) {
+      clearInterval(rotationTimer);
+    }
+    rotationTimer = setInterval(function() {
+      navigateProduct('next');
+    }, 30000); // 30 seconds
+  }
+
+  function navigateProduct(direction) {
+    if (filteredProducts.length === 0) return;
+
+    if (direction === 'next') {
+      currentProductIndex = (currentProductIndex + 1) % filteredProducts.length;
+    } else if (direction === 'prev') {
+      currentProductIndex = (currentProductIndex - 1 + filteredProducts.length) % filteredProducts.length;
+    }
+
+    displayProduct(filteredProducts[currentProductIndex]);
+  }
+
+  function addAffiliateTag(url) {
+    if (!affiliateTag || !url) return url;
+
+    try {
+      const urlObj = new URL(url);
+      urlObj.searchParams.set('tag', affiliateTag);
+      return urlObj.toString();
+    } catch (e) {
+      console.error('Invalid URL:', url);
+      return url;
+    }
+  }
+
+  function displayProduct(product) {
+    if (!product) return;
+
+    const container = document.getElementById('amazon-product-display');
+    if (!container) return;
+
+    // Add affiliate tag to product link
+    const productLink = addAffiliateTag(product.link);
+
+    // Show navigation buttons only if there are multiple products
+    const showNavigation = filteredProducts.length > 1;
+
+    container.innerHTML = `
+      <div class="amazon-product-display">
+        ${showNavigation ? `
+          <button class="product-nav-btn product-nav-prev" aria-label="Previous product">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+        ` : ''}
+        <div class="product-image">
+          <a href="${productLink}" target="_blank" rel="noopener noreferrer nofollow sponsored">
+            <img src="${product.image}" alt="${product.title}">
+          </a>
+        </div>
+        <div class="product-details">
+          <h4>
+            <a href="${productLink}" target="_blank" rel="noopener noreferrer nofollow sponsored">
+              ${product.title}
+            </a>
+          </h4>
+          <a href="${productLink}" target="_blank" rel="noopener noreferrer nofollow sponsored" class="product-link">
+            View on Amazon
+          </a>
+          ${product.tags ? `
+            <div class="product-tags">
+              <small>
+                ${product.tags.map(tag => `<span class="product-tag">${tag}</span>`).join('')}
+              </small>
+            </div>
+          ` : ''}
+        </div>
+        ${showNavigation ? `
+          <button class="product-nav-btn product-nav-next" aria-label="Next product">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        ` : ''}
+      </div>
+    `;
+
+    // Add event listeners for navigation buttons
+    if (showNavigation) {
+      const prevBtn = container.querySelector('.product-nav-prev');
+      const nextBtn = container.querySelector('.product-nav-next');
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+          navigateProduct('prev');
+          startRotationTimer(); // Reset timer on manual navigation
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+          navigateProduct('next');
+          startRotationTimer(); // Reset timer on manual navigation
+        });
+      }
+    }
+  }
+
+  // Display initial product (first in shuffled array)
+  if (filteredProducts.length > 0) {
+    displayProduct(filteredProducts[currentProductIndex]);
+
+    // Start automatic rotation if there are products
+    if (filteredProducts.length > 1) {
+      startRotationTimer();
+    }
+  }
+})();
+</script>
+{% endif %}
