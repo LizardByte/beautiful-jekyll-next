@@ -1177,7 +1177,7 @@ pre {
 /* --- Amazon Affiliate Section --- */
 .amazon-affiliate-container {
   margin: 2rem 0;
-  padding: 1.5rem;
+  padding: 1.5rem 3.5rem;
   background-color: color-mix(in srgb, var(--navbar-col) 50%, transparent);
   border-radius: 0.5rem;
   border: 1px solid var(--navbar-border-col);
