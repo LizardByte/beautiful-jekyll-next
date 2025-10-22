@@ -1193,41 +1193,50 @@ pre {
   font-size: 0.85rem;
 }
 
+.amazon-affiliate-container {
+  position: relative;
+}
+
 .amazon-affiliate-container .amazon-product-display {
   display: flex;
   gap: 1.5rem;
   align-items: center;
   flex-wrap: wrap;
-  position: relative;
 }
 
 .amazon-affiliate-container .product-nav-btn {
-  background-color: var(--link-col);
-  color: var(--page-col);
+  background: none;
   border: none;
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: var(--text-col);
+  padding: 0.5rem;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  flex-shrink: 0;
+  transition: opacity 0.3s, transform 0.2s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.amazon-affiliate-container .product-nav-prev {
+  left: 0;
+}
+
+.amazon-affiliate-container .product-nav-next {
+  right: 0;
 }
 
 .amazon-affiliate-container .product-nav-btn:hover {
-  background-color: var(--hover-col);
-  transform: scale(1.1);
+  opacity: 0.7;
 }
 
 .amazon-affiliate-container .product-nav-btn:active {
-  transform: scale(0.95);
+  transform: translateY(-50%) scale(0.9);
 }
 
 .amazon-affiliate-container .product-nav-btn svg {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  display: block;
 }
 
 .amazon-affiliate-container .product-image {
