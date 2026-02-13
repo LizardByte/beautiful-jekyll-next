@@ -2,7 +2,7 @@
 # Amazon Affiliate Products
 # Each product can have multiple tags for categorization
 # Tags help match products to relevant blog posts
-# Note: The affiliate tag is configured in _config_theme.yml as 'amazon_affiliate_tag'
+# Note: The affiliate tag is configured in _config.yml as 'amazon_products.affiliate_tag'
 
 - title: >-
     ASUS TUF Gaming GeForce RTX ™ 5070 12GB GDDR7 OC Edition Gaming Graphics Card

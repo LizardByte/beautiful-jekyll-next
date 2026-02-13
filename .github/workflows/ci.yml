@@ -1,16 +1,9 @@
 ---
 name: CI
-permissions:
-  contents: read
+permissions: {}
 
 on:
   pull_request:
-    branches:
-      - master
-    types:
-      - opened
-      - synchronize
-      - reopened
   push:
     branches:
       - master
@@ -22,6 +15,8 @@ concurrency:
 jobs:
   build:
     name: Build Jekyll
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
