@@ -64,7 +64,7 @@ let BeautifulJekyllJS = {
     // Get the actual theme to apply (light or dark), resolving 'auto' to system preference
     const getThemeToApply = (theme) => {
       if (theme === 'auto') {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        return globalThis.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
       return theme;
     };
@@ -87,7 +87,7 @@ let BeautifulJekyllJS = {
     // Set the theme on the document
     const setTheme = (theme) => {
       const themeToApply = getThemeToApply(theme);
-      document.documentElement.setAttribute('data-bs-theme', themeToApply);
+      document.documentElement.dataset.bsTheme = themeToApply;
 
       // Update navbar classes after theme change
       setTimeout(BeautifulJekyllJS.initNavbar, 10);
@@ -96,7 +96,7 @@ let BeautifulJekyllJS = {
       if (isDropdownMode) {
         const themeDropdownItems = document.querySelectorAll('[data-bs-theme-value]');
         themeDropdownItems.forEach(item => {
-          const itemTheme = item.getAttribute('data-bs-theme-value');
+          const itemTheme = item.dataset.bsThemeValue;
           if (itemTheme === theme) {
             item.classList.add('active');
           } else {
@@ -106,7 +106,7 @@ let BeautifulJekyllJS = {
       }
 
       // Update the theme icon in the navbar
-      const themeIcon = document.getElementById('theme-icon');
+      const themeIcon = document.getElementById('theme-icon-dropdown') || document.getElementById('theme-icon-button');
       if (themeIcon) {
         themeIcon.classList.remove('fa-sun', 'fa-moon', 'fa-circle-half-stroke');
         if (theme === 'light') {
@@ -128,7 +128,7 @@ let BeautifulJekyllJS = {
     setTheme(getPreferredTheme());
 
     // Listen for system theme changes when in auto mode
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    globalThis.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
       const storedTheme = getStoredTheme();
       if (storedTheme === 'auto' || !storedTheme) {
         setTheme('auto');
@@ -142,7 +142,7 @@ let BeautifulJekyllJS = {
       themeDropdownItems.forEach(item => {
         item.addEventListener('click', (e) => {
           e.preventDefault();
-          const theme = item.getAttribute('data-bs-theme-value');
+          const theme = item.dataset.bsThemeValue;
           setStoredTheme(theme);
           setTheme(theme);
         });

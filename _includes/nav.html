@@ -35,10 +35,10 @@
           {% assign theme_style = site.theme-switcher-style | default: 'button' %}
           {% if theme_style == 'dropdown' %}
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Change theme">
-                <span id="theme-icon" class="fas fa-circle-half-stroke"></span>
+              <button class="nav-link dropdown-toggle" id="themeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Change theme">
+                <span id="theme-icon-dropdown" class="fas fa-circle-half-stroke"></span>
                 <span class="d-xl-none ms-1">Theme</span>
-              </a>
+              </button>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
                 <a class="dropdown-item" href="#" data-bs-theme-value="light">
                   <span class="fas fa-sun me-2"></span>Light
@@ -53,10 +53,10 @@
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="#" id="theme-toggle" title="Toggle theme (currently: auto)">
-                <span id="theme-icon" class="fas fa-circle-half-stroke"></span>
+              <button class="nav-link" id="theme-toggle" type="button" title="Toggle theme (currently: auto)">
+                <span id="theme-icon-button" class="fas fa-circle-half-stroke"></span>
                 <span class="d-xl-none ms-1">Theme</span>
-              </a>
+              </button>
             </li>
           {% endif %}
         {%- endif -%}

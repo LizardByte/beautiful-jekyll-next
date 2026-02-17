@@ -16,12 +16,11 @@
 
   const getThemeToApply = (theme) => {
     if (theme === 'auto') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return globalThis.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     return theme;
   };
 
   const theme = getPreferredTheme();
-  const themeToApply = getThemeToApply(theme);
-  document.documentElement.setAttribute('data-bs-theme', themeToApply);
+  document.documentElement.dataset.bsTheme = getThemeToApply(theme);
 })();
