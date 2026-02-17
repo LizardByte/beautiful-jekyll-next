@@ -36,25 +36,25 @@
           {% if theme_style == 'dropdown' %}
             <li class="nav-item dropdown">
               <button class="nav-link dropdown-toggle" id="themeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Change theme">
-                <span id="theme-icon-dropdown" class="fas fa-circle-half-stroke"></span>
+                <span id="theme-icon-dropdown" class="fas fa-fw fa-circle-half-stroke"></span>
                 <span class="d-xl-none ms-1">Theme</span>
               </button>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
                 <a class="dropdown-item" href="#" data-bs-theme-value="light">
-                  <span class="fas fa-sun me-2"></span>Light
+                  <span class="fas fa-fw fa-sun me-2"></span>Light
                 </a>
                 <a class="dropdown-item" href="#" data-bs-theme-value="dark">
-                  <span class="fas fa-moon me-2"></span>Dark
+                  <span class="fas fa-fw fa-moon me-2"></span>Dark
                 </a>
                 <a class="dropdown-item" href="#" data-bs-theme-value="auto">
-                  <span class="fas fa-circle-half-stroke me-2"></span>Auto
+                  <span class="fas fa-fw fa-circle-half-stroke me-2"></span>Auto
                 </a>
               </div>
             </li>
           {% else %}
             <li class="nav-item">
               <button class="nav-link" id="theme-toggle" type="button" title="Toggle theme (currently: auto)">
-                <span id="theme-icon-button" class="fas fa-circle-half-stroke"></span>
+                <span id="theme-icon-button" class="fas fa-fw fa-circle-half-stroke"></span>
                 <span class="d-xl-none ms-1">Theme</span>
               </button>
             </li>
@@ -63,7 +63,7 @@
         {% if site.post_search %}
           <li class="nav-item">
             <a class="nav-link" id="nav-search-link" href="#" title="Search">
-              <span id="nav-search-icon" class="fa fa-search"></span>
+              <span id="nav-search-icon" class="fa fa-fw fa-search"></span>
               <span id="nav-search-text">Search</span>
             </a>
           </li>
