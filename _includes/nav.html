@@ -31,7 +31,7 @@
             </li>
           {%- endif -%}
         {%- endfor -%}
-        {% if site.theme-switcher %}
+        {% if site.theme-switcher != false %}
           {% assign theme_style = site.theme-switcher-style | default: 'button' %}
           {% if theme_style == 'dropdown' %}
             <li class="nav-item dropdown">
