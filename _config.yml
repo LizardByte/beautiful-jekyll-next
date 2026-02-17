@@ -160,17 +160,37 @@ navbar-var-length: false
 
 # Personalize the colors in your website. Color values can be any valid CSS color
 
-page-col: "#FFFFFF"
+# Theme switcher configuration
+# Enable the theme switcher button in the navbar
+theme-switcher: true
+# Theme switcher style: 'button' (default, cycles through themes on click) or 'dropdown' (shows menu with all options)
+theme-switcher-style: 'button'
+
+# Light theme colors
+page-col: "#ffffff"
 text-col: "#404040"
-link-col: "#008AFF"
-hover-col: "#0085A1"
-navbar-col: "#EAEAEA"
+link-col: "#008aff"
+hover-col: "#0085a1"
+navbar-col: "#eaeaea"
 navbar-text-col: "#404040"
-navbar-border-col: "#DDDDDD"
-footer-col: "#EAEAEA"
+navbar-border-col: "#dddddd"
+footer-col: "#eaeaea"
 footer-text-col: "#777777"
 footer-link-col: "#404040"
-footer-hover-col: "#0085A1"
+footer-hover-col: "#0085a1"
+
+# Dark theme colors
+dark-page-col: "#1a1a1a"
+dark-text-col: "#e0e0e0"
+dark-link-col: "#4d9fff"
+dark-hover-col: "#66b3ff"
+dark-navbar-col: "#2d2d2d"
+dark-navbar-text-col: "#e0e0e0"
+dark-navbar-border-col: "#404040"
+dark-footer-col: "#2d2d2d"
+dark-footer-text-col: "#b0b0b0"
+dark-footer-link-col: "#e0e0e0"
+dark-footer-hover-col: "#66b3ff"
 
 # Alternatively, the navbar, footer, and page background can be set to an image instead of color
 

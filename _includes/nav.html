@@ -31,6 +31,35 @@
             </li>
           {%- endif -%}
         {%- endfor -%}
+        {% if site.theme-switcher %}
+          {% assign theme_style = site.theme-switcher-style | default: 'button' %}
+          {% if theme_style == 'dropdown' %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Change theme">
+                <span id="theme-icon" class="fas fa-circle-half-stroke"></span>
+                <span class="d-xl-none ms-1">Theme</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
+                <a class="dropdown-item" href="#" data-bs-theme-value="light">
+                  <span class="fas fa-sun me-2"></span>Light
+                </a>
+                <a class="dropdown-item" href="#" data-bs-theme-value="dark">
+                  <span class="fas fa-moon me-2"></span>Dark
+                </a>
+                <a class="dropdown-item" href="#" data-bs-theme-value="auto">
+                  <span class="fas fa-circle-half-stroke me-2"></span>Auto
+                </a>
+              </div>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="theme-toggle" title="Toggle theme (currently: auto)">
+                <span id="theme-icon" class="fas fa-circle-half-stroke"></span>
+                <span class="d-xl-none ms-1">Theme</span>
+              </a>
+            </li>
+          {% endif %}
+        {%- endif -%}
         {% if site.post_search %}
           <li class="nav-item">
             <a class="nav-link" id="nav-search-link" href="#" title="Search">

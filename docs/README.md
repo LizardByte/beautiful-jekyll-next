@@ -28,6 +28,7 @@ suitable for my needs such as the following:
 - Added different styles for GitHub badges on blog posts
 - Pull Request builds can be previewed before merging, making it easier to review changes between versions
 - Display Amazon products with affiliate links at the end of blog posts
+- Theme switcher
 
 For a full list of differences, see https://github.com/daattali/beautiful-jekyll/compare/master...LizardByte:master
 
@@ -47,6 +48,7 @@ For a full list of differences, see https://github.com/daattali/beautiful-jekyll
 - **Modern**: Uses the latest best practices and technologies to achieve nearly perfect scores on Google Chrome's Audit.
 - **Mobile-first**: Designed to look great on both large-screen and small-screen (mobile) devices.
 - **Highly customizable**: Many personalization settings such as changing the background color/image, adding a logo.
+- **Theme switcher**: Built-in light/dark theme switcher with auto mode that respects system preferences.
 - **Flexible usage**: Use Beautiful Jekyll Next directly on GitHub or via a Ruby gem. (TODO: create a Ruby gem)
 - **SEO and social media support**: Customize how your site looks on Google and when shared on social media.
 - **Comments support**: Add comments to any page using either
@@ -186,6 +188,7 @@ These are advanced parameters that are only useful for people who need very fine
 
 | Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| theme-switcher | Enable or disable the theme switcher button in the navbar. Set to `true` to show the theme switcher, or `false` to hide it. When enabled, users can toggle between light, dark, and auto (system preference) themes.                                                                                                                                                                                                                                                       |
 | footer-extra   | If you want to include extra content below the social media icons in the footer, create an HTML file in the `_includes/` folder (for example `_includes/myinfo.html`) and set `footer-extra` to the name of the file (for example `footer-extra: myinfo.html`). Accepts a single file or a list of files.                                                                                                                                                                  |
 | before-content | Similar to `footer-extra`, but used for including HTML before the main content of the page (below the title).                                                                                                                                                                                                                                                                                                                                                              |
 | after-content  | Similar to `footer-extra`, but used for including HTML after the main content of the page (above the footer).                                                                                                                                                                                                                                                                                                                                                              |
