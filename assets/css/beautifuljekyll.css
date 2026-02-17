@@ -3,6 +3,7 @@ layout: null
 ---
 
 @import url("pygment_highlights.css");
+@import url("pygment_highlights_dark.css");
 
 :root {
   /* Light theme config file CSS variables */

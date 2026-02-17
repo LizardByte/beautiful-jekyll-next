@@ -81,6 +81,7 @@ dark-footer-hover-col: "#66b3ff"
 - Your choice is saved and persists across browsing sessions
 - In Auto mode, the theme automatically matches your system/browser preference
 - The theme is applied before the page renders (no flash of wrong theme)
+- Code syntax highlighting automatically adapts to the selected theme
 
 ## Authors
 
