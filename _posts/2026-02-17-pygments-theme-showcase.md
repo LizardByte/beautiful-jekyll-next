@@ -7,131 +7,6 @@ tags: [themes, syntax-highlighting, code, pygments]
 ---
 
 <style>
-/* Override the site's default Pygments themes to allow dynamic theme switching */
-/* Reset all default Pygments styles so only the dynamically loaded theme applies */
-
-/* Remove all light theme Pygments styles */
-.highlight .c { all: unset; }
-.highlight .err { all: unset; }
-.highlight .k { all: unset; }
-.highlight .o { all: unset; }
-.highlight .cm { all: unset; }
-.highlight .cp { all: unset; }
-.highlight .c1 { all: unset; }
-.highlight .cs { all: unset; }
-.highlight .gd { all: unset; }
-.highlight .gd .x { all: unset; }
-.highlight .ge { all: unset; }
-.highlight .gr { all: unset; }
-.highlight .gh { all: unset; }
-.highlight .gi { all: unset; }
-.highlight .gi .x { all: unset; }
-.highlight .go { all: unset; }
-.highlight .gp { all: unset; }
-.highlight .gs { all: unset; }
-.highlight .gu { all: unset; }
-.highlight .gt { all: unset; }
-.highlight .kc { all: unset; }
-.highlight .kd { all: unset; }
-.highlight .kp { all: unset; }
-.highlight .kr { all: unset; }
-.highlight .kt { all: unset; }
-.highlight .m { all: unset; }
-.highlight .s { all: unset; }
-.highlight .na { all: unset; }
-.highlight .nb { all: unset; }
-.highlight .nc { all: unset; }
-.highlight .no { all: unset; }
-.highlight .ni { all: unset; }
-.highlight .ne { all: unset; }
-.highlight .nf { all: unset; }
-.highlight .nn { all: unset; }
-.highlight .nt { all: unset; }
-.highlight .nv { all: unset; }
-.highlight .ow { all: unset; }
-.highlight .w { all: unset; }
-.highlight .mf { all: unset; }
-.highlight .mh { all: unset; }
-.highlight .mi { all: unset; }
-.highlight .mo { all: unset; }
-.highlight .sb { all: unset; }
-.highlight .sc { all: unset; }
-.highlight .sd { all: unset; }
-.highlight .s2 { all: unset; }
-.highlight .se { all: unset; }
-.highlight .sh { all: unset; }
-.highlight .si { all: unset; }
-.highlight .sx { all: unset; }
-.highlight .sr { all: unset; }
-.highlight .s1 { all: unset; }
-.highlight .ss { all: unset; }
-.highlight .bp { all: unset; }
-.highlight .vc { all: unset; }
-.highlight .vg { all: unset; }
-.highlight .vi { all: unset; }
-.highlight .il { all: unset; }
-
-/* Remove all dark theme Pygments styles with higher specificity */
-[data-bs-theme="dark"] .highlight .c { all: unset !important; }
-[data-bs-theme="dark"] .highlight .err { all: unset !important; }
-[data-bs-theme="dark"] .highlight .k { all: unset !important; }
-[data-bs-theme="dark"] .highlight .o { all: unset !important; }
-[data-bs-theme="dark"] .highlight .cm { all: unset !important; }
-[data-bs-theme="dark"] .highlight .cp { all: unset !important; }
-[data-bs-theme="dark"] .highlight .c1 { all: unset !important; }
-[data-bs-theme="dark"] .highlight .cs { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gd { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gd .x { all: unset !important; }
-[data-bs-theme="dark"] .highlight .ge { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gr { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gh { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gi { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gi .x { all: unset !important; }
-[data-bs-theme="dark"] .highlight .go { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gp { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gs { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gu { all: unset !important; }
-[data-bs-theme="dark"] .highlight .gt { all: unset !important; }
-[data-bs-theme="dark"] .highlight .kc { all: unset !important; }
-[data-bs-theme="dark"] .highlight .kd { all: unset !important; }
-[data-bs-theme="dark"] .highlight .kp { all: unset !important; }
-[data-bs-theme="dark"] .highlight .kr { all: unset !important; }
-[data-bs-theme="dark"] .highlight .kt { all: unset !important; }
-[data-bs-theme="dark"] .highlight .m { all: unset !important; }
-[data-bs-theme="dark"] .highlight .s { all: unset !important; }
-[data-bs-theme="dark"] .highlight .na { all: unset !important; }
-[data-bs-theme="dark"] .highlight .nb { all: unset !important; }
-[data-bs-theme="dark"] .highlight .nc { all: unset !important; }
-[data-bs-theme="dark"] .highlight .no { all: unset !important; }
-[data-bs-theme="dark"] .highlight .ni { all: unset !important; }
-[data-bs-theme="dark"] .highlight .ne { all: unset !important; }
-[data-bs-theme="dark"] .highlight .nf { all: unset !important; }
-[data-bs-theme="dark"] .highlight .nn { all: unset !important; }
-[data-bs-theme="dark"] .highlight .nt { all: unset !important; }
-[data-bs-theme="dark"] .highlight .nv { all: unset !important; }
-[data-bs-theme="dark"] .highlight .ow { all: unset !important; }
-[data-bs-theme="dark"] .highlight .w { all: unset !important; }
-[data-bs-theme="dark"] .highlight .mf { all: unset !important; }
-[data-bs-theme="dark"] .highlight .mh { all: unset !important; }
-[data-bs-theme="dark"] .highlight .mi { all: unset !important; }
-[data-bs-theme="dark"] .highlight .mo { all: unset !important; }
-[data-bs-theme="dark"] .highlight .sb { all: unset !important; }
-[data-bs-theme="dark"] .highlight .sc { all: unset !important; }
-[data-bs-theme="dark"] .highlight .sd { all: unset !important; }
-[data-bs-theme="dark"] .highlight .s2 { all: unset !important; }
-[data-bs-theme="dark"] .highlight .se { all: unset !important; }
-[data-bs-theme="dark"] .highlight .sh { all: unset !important; }
-[data-bs-theme="dark"] .highlight .si { all: unset !important; }
-[data-bs-theme="dark"] .highlight .sx { all: unset !important; }
-[data-bs-theme="dark"] .highlight .sr { all: unset !important; }
-[data-bs-theme="dark"] .highlight .s1 { all: unset !important; }
-[data-bs-theme="dark"] .highlight .ss { all: unset !important; }
-[data-bs-theme="dark"] .highlight .bp { all: unset !important; }
-[data-bs-theme="dark"] .highlight .vc { all: unset !important; }
-[data-bs-theme="dark"] .highlight .vg { all: unset !important; }
-[data-bs-theme="dark"] .highlight .vi { all: unset !important; }
-[data-bs-theme="dark"] .highlight .il { all: unset !important; }
-
 /* Theme selector styling */
 .theme-selector {
   margin: 2rem 0;
@@ -205,7 +80,7 @@ Use the dropdowns below to preview different themes and find your favorites.
       {% endfor %}
     </optgroup>
   </select>
-  
+
   <div class="theme-info">
     <strong>Config value for _config.yml:</strong><br>
     <code id="config-value">pygments-theme-light: "beautiful-jekyll-og"</code>
@@ -328,13 +203,13 @@ public class Fibonacci {
             return fibonacci(n - 1) + fibonacci(n - 2);
         }
     }
-    
+
     public static void main(String[] args) {
         // Test the function
         for (int i = 0; i < 10; i++) {
             System.out.println("F(" + i + ") = " + fibonacci(i));
         }
-        
+
         // Array example
         int[] squares = new int[10];
         for (int i = 0; i < 10; i++) {
@@ -419,7 +294,35 @@ WHERE username = 'john_doe';
   const themeSelect = document.getElementById('theme-select');
   const configValue = document.getElementById('config-value');
   const styleContainer = document.getElementById('theme-style-container');
-  
+
+  // Function to wrap CSS rules with high specificity selectors
+  function wrapWithHighSpecificity(css) {
+    // Replace all .highlight selectors with more specific ones that work in both light and dark modes
+    // This ensures our dynamic theme overrides the site's default themes
+
+    // First, handle the simple .highlight token classes
+    css = css.replace(/\.hightlight\s+([.\w-]+)/g, 'html body .hightlight $1');
+
+    // Handle [data-bs-theme="dark"] if present, make it even more specific
+    css = css.replace(/\[data-bs-theme="dark"\]\s+/g, 'html[data-bs-theme="dark"] body ');
+
+    // Wrap all remaining .highlight rules with html body for higher specificity
+    css = css.replace(/(^|[^-\w])\.highlight\s+/g, '$1html body .highlight ');
+
+    // Add !important to all color, background-color, font-weight, and font-style properties
+    css = css.replace(/\b(color|background-color|background|font-weight|font-style|border)\s*:\s*([^;}]+?)(\s*;|\s*})/gi, 
+      function(match, property, value, ending) {
+        // Don't add !important if it's already there
+        if (value.trim().endsWith('!important')) {
+          return match;
+        }
+        return property + ': ' + value.trim() + ' !important' + ending;
+      }
+    );
+
+    return css;
+  }
+
   // Function to load and apply a theme
   async function loadTheme(themePath) {
     try {
@@ -435,7 +338,10 @@ WHERE username = 'john_doe';
         throw new Error(`Failed to load theme: ${response.status}`);
       }
       
-      const css = await response.text();
+      let css = await response.text();
+      
+      // Wrap with high specificity selectors and add !important
+      css = wrapWithHighSpecificity(css);
       
       // Remove existing theme style
       const existingStyle = document.getElementById('dynamic-theme-style');
