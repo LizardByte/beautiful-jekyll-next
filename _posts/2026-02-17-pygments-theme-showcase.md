@@ -7,6 +7,132 @@ tags: [themes, syntax-highlighting, code, pygments]
 ---
 
 <style>
+/* Override the site's default Pygments themes to allow dynamic theme switching */
+/* Reset all default Pygments styles so only the dynamically loaded theme applies */
+
+/* Remove all light theme Pygments styles */
+.highlight .c { all: unset; }
+.highlight .err { all: unset; }
+.highlight .k { all: unset; }
+.highlight .o { all: unset; }
+.highlight .cm { all: unset; }
+.highlight .cp { all: unset; }
+.highlight .c1 { all: unset; }
+.highlight .cs { all: unset; }
+.highlight .gd { all: unset; }
+.highlight .gd .x { all: unset; }
+.highlight .ge { all: unset; }
+.highlight .gr { all: unset; }
+.highlight .gh { all: unset; }
+.highlight .gi { all: unset; }
+.highlight .gi .x { all: unset; }
+.highlight .go { all: unset; }
+.highlight .gp { all: unset; }
+.highlight .gs { all: unset; }
+.highlight .gu { all: unset; }
+.highlight .gt { all: unset; }
+.highlight .kc { all: unset; }
+.highlight .kd { all: unset; }
+.highlight .kp { all: unset; }
+.highlight .kr { all: unset; }
+.highlight .kt { all: unset; }
+.highlight .m { all: unset; }
+.highlight .s { all: unset; }
+.highlight .na { all: unset; }
+.highlight .nb { all: unset; }
+.highlight .nc { all: unset; }
+.highlight .no { all: unset; }
+.highlight .ni { all: unset; }
+.highlight .ne { all: unset; }
+.highlight .nf { all: unset; }
+.highlight .nn { all: unset; }
+.highlight .nt { all: unset; }
+.highlight .nv { all: unset; }
+.highlight .ow { all: unset; }
+.highlight .w { all: unset; }
+.highlight .mf { all: unset; }
+.highlight .mh { all: unset; }
+.highlight .mi { all: unset; }
+.highlight .mo { all: unset; }
+.highlight .sb { all: unset; }
+.highlight .sc { all: unset; }
+.highlight .sd { all: unset; }
+.highlight .s2 { all: unset; }
+.highlight .se { all: unset; }
+.highlight .sh { all: unset; }
+.highlight .si { all: unset; }
+.highlight .sx { all: unset; }
+.highlight .sr { all: unset; }
+.highlight .s1 { all: unset; }
+.highlight .ss { all: unset; }
+.highlight .bp { all: unset; }
+.highlight .vc { all: unset; }
+.highlight .vg { all: unset; }
+.highlight .vi { all: unset; }
+.highlight .il { all: unset; }
+
+/* Remove all dark theme Pygments styles with higher specificity */
+[data-bs-theme="dark"] .highlight .c { all: unset !important; }
+[data-bs-theme="dark"] .highlight .err { all: unset !important; }
+[data-bs-theme="dark"] .highlight .k { all: unset !important; }
+[data-bs-theme="dark"] .highlight .o { all: unset !important; }
+[data-bs-theme="dark"] .highlight .cm { all: unset !important; }
+[data-bs-theme="dark"] .highlight .cp { all: unset !important; }
+[data-bs-theme="dark"] .highlight .c1 { all: unset !important; }
+[data-bs-theme="dark"] .highlight .cs { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gd { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gd .x { all: unset !important; }
+[data-bs-theme="dark"] .highlight .ge { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gr { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gh { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gi { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gi .x { all: unset !important; }
+[data-bs-theme="dark"] .highlight .go { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gp { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gs { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gu { all: unset !important; }
+[data-bs-theme="dark"] .highlight .gt { all: unset !important; }
+[data-bs-theme="dark"] .highlight .kc { all: unset !important; }
+[data-bs-theme="dark"] .highlight .kd { all: unset !important; }
+[data-bs-theme="dark"] .highlight .kp { all: unset !important; }
+[data-bs-theme="dark"] .highlight .kr { all: unset !important; }
+[data-bs-theme="dark"] .highlight .kt { all: unset !important; }
+[data-bs-theme="dark"] .highlight .m { all: unset !important; }
+[data-bs-theme="dark"] .highlight .s { all: unset !important; }
+[data-bs-theme="dark"] .highlight .na { all: unset !important; }
+[data-bs-theme="dark"] .highlight .nb { all: unset !important; }
+[data-bs-theme="dark"] .highlight .nc { all: unset !important; }
+[data-bs-theme="dark"] .highlight .no { all: unset !important; }
+[data-bs-theme="dark"] .highlight .ni { all: unset !important; }
+[data-bs-theme="dark"] .highlight .ne { all: unset !important; }
+[data-bs-theme="dark"] .highlight .nf { all: unset !important; }
+[data-bs-theme="dark"] .highlight .nn { all: unset !important; }
+[data-bs-theme="dark"] .highlight .nt { all: unset !important; }
+[data-bs-theme="dark"] .highlight .nv { all: unset !important; }
+[data-bs-theme="dark"] .highlight .ow { all: unset !important; }
+[data-bs-theme="dark"] .highlight .w { all: unset !important; }
+[data-bs-theme="dark"] .highlight .mf { all: unset !important; }
+[data-bs-theme="dark"] .highlight .mh { all: unset !important; }
+[data-bs-theme="dark"] .highlight .mi { all: unset !important; }
+[data-bs-theme="dark"] .highlight .mo { all: unset !important; }
+[data-bs-theme="dark"] .highlight .sb { all: unset !important; }
+[data-bs-theme="dark"] .highlight .sc { all: unset !important; }
+[data-bs-theme="dark"] .highlight .sd { all: unset !important; }
+[data-bs-theme="dark"] .highlight .s2 { all: unset !important; }
+[data-bs-theme="dark"] .highlight .se { all: unset !important; }
+[data-bs-theme="dark"] .highlight .sh { all: unset !important; }
+[data-bs-theme="dark"] .highlight .si { all: unset !important; }
+[data-bs-theme="dark"] .highlight .sx { all: unset !important; }
+[data-bs-theme="dark"] .highlight .sr { all: unset !important; }
+[data-bs-theme="dark"] .highlight .s1 { all: unset !important; }
+[data-bs-theme="dark"] .highlight .ss { all: unset !important; }
+[data-bs-theme="dark"] .highlight .bp { all: unset !important; }
+[data-bs-theme="dark"] .highlight .vc { all: unset !important; }
+[data-bs-theme="dark"] .highlight .vg { all: unset !important; }
+[data-bs-theme="dark"] .highlight .vi { all: unset !important; }
+[data-bs-theme="dark"] .highlight .il { all: unset !important; }
+
+/* Theme selector styling */
 .theme-selector {
   margin: 2rem 0;
   padding: 1.5rem;
