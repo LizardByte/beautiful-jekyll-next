@@ -75,7 +75,7 @@ Use the dropdowns below to preview different themes and find your favorites.
         {% if dir_and_file.size > 1 %}
           {% assign dir = dir_and_file[0] %}
         {% else %}
-          {% assign dir = "root" %}
+          {% assign dir = "_root" %}
         {% endif %}
         {% unless directories contains dir %}
           {% assign directories = directories | push: dir %}
@@ -88,7 +88,7 @@ Use the dropdowns below to preview different themes and find your favorites.
     
     {% comment %}Loop through each directory and create optgroups{% endcomment %}
     {% for dir in sorted_dirs %}
-      {% if dir == "root" %}
+      {% if dir == "_root" %}
         {% assign label = "Custom Themes" %}
         {% assign dir_path = "" %}
       {% else %}
@@ -105,7 +105,7 @@ Use the dropdowns below to preview different themes and find your favorites.
             {% if dir_and_file.size > 1 %}
               {% assign file_dir = dir_and_file[0] %}
             {% else %}
-              {% assign file_dir = "root" %}
+              {% assign file_dir = "_root" %}
             {% endif %}
           {% endif %}
           
