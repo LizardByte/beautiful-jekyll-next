@@ -178,7 +178,8 @@ tags: [themes, syntax-highlighting, code, pygments]
 }
 </style>
 
-Beautiful Jekyll Next includes over 80 Pygments syntax highlighting themes to choose from! Use the dropdowns below to preview different themes and find your favorites.
+Beautiful Jekyll Next includes over 80 Pygments syntax highlighting themes to choose from!
+Use the dropdowns below to preview different themes and find your favorites.
 
 ## Interactive Theme Preview
 
