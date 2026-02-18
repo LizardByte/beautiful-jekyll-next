@@ -3,7 +3,7 @@ layout: null
 ---
 
 {% assign light_theme = site.pygments-theme-light | default: "beautiful-jekyll-og" %}
-{% assign dark_theme = site.pygments-theme-dark | default: "claude-dark" %}
+{% assign dark_theme = site.pygments-theme-dark | default: "beautiful-jekyll-og" %}
 
 /* Light theme syntax highlighting: {{ light_theme }} */
 {% capture light_theme_path %}pygment_highlights/{{ light_theme }}.css{% endcapture %}

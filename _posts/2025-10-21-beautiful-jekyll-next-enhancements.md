@@ -81,8 +81,8 @@ You can choose from dozens of Pygments themes for code syntax highlighting. Conf
 # Light theme syntax highlighting (default: beautiful-jekyll-og)
 pygments-theme-light: "beautiful-jekyll-og"
 
-# Dark theme syntax highlighting (default: claude-dark)
-pygments-theme-dark: "claude-dark"
+# Dark theme syntax highlighting (default: beautiful-jekyll-og)
+pygments-theme-dark: "beautiful-jekyll-og"
 ```
 
 **Popular combinations:**

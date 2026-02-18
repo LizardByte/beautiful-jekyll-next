@@ -54,7 +54,13 @@ tags: [themes, syntax-highlighting, code, pygments]
 </style>
 
 Beautiful Jekyll Next includes over 80 Pygments syntax highlighting themes to choose from!
-Use the dropdowns below to preview different themes and find your favorites.
+Use the dropdown below to preview different themes and find your favorites.
+
+{: .box-note}
+**Note:** The theme previews below use enhanced CSS specificity to override the site's default styles for demonstration
+purposes. When you configure a theme in your `_config.yml` and build your site, the actual appearance may differ
+slightly based on your site's color configuration and theme settings. Some themes define colors that work better in
+specific contexts and may appear differently when the page is built with your custom color options.
 
 ## Interactive Theme Preview
 
@@ -120,8 +126,10 @@ Use the dropdowns below to preview different themes and find your favorites.
   </select>
 
   <div class="theme-info">
-    <strong>Config value for _config.yml:</strong><br>
-    <code id="config-value">pygments-theme-light: "beautiful-jekyll-og"</code>
+    <strong>Config values for _config.yml:</strong><br>
+    <code id="config-value-light">pygments-theme-light: "beautiful-jekyll-og"</code><br>
+    <em>OR</em><br>
+    <code id="config-value-dark">pygments-theme-dark: "beautiful-jekyll-og"</code>
   </div>
 </div>
 
@@ -330,7 +338,8 @@ WHERE username = 'john_doe';
 <script>
 (function() {
   const themeSelect = document.getElementById('theme-select');
-  const configValue = document.getElementById('config-value');
+  const configValueLight = document.getElementById('config-value-light');
+  const configValueDark = document.getElementById('config-value-dark');
   const styleContainer = document.getElementById('theme-style-container');
 
   // Function to wrap CSS rules with high specificity selectors
@@ -364,11 +373,9 @@ WHERE username = 'john_doe';
   // Function to load and apply a theme
   async function loadTheme(themePath) {
     try {
-      // Update config value display
-      const isLight = !themePath.includes('dark') && !themePath.includes('night') &&
-                     !themePath.includes('monokai') && !themePath.includes('dracula');
-      const configKey = isLight ? 'pygments-theme-light' : 'pygments-theme-dark';
-      configValue.textContent = `${configKey}: "${themePath}"`;
+      // Update both config value displays
+      configValueLight.textContent = `pygments-theme-light: "${themePath}"`;
+      configValueDark.textContent = `pygments-theme-dark: "${themePath}"`;
 
       // Fetch the CSS file
       const response = await fetch(`{{ "/assets/css/pygment_highlights/" | relative_url }}${themePath}.css`);
@@ -398,7 +405,8 @@ WHERE username = 'john_doe';
 
     } catch (error) {
       console.error('Error loading theme:', error);
-      configValue.textContent = 'Error loading theme. Please try another.';
+      configValueLight.textContent = 'Error loading theme. Please try another.';
+      configValueDark.textContent = 'Error loading theme. Please try another.';
     }
   }
 
@@ -490,7 +498,6 @@ Once you've found a theme you like:
 
 - Total themes available: **{{ site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/'" | where_exp: "file", "file.extname == '.css'" | size | plus: 2 }}+**
 - All themes are generated using [Pygments](https://pygments.org/)
+- Many additional themes provided by [Pygments Styles](https://pygments-styles.org/)
 - Compatible with Beautiful Jekyll Next's theme switcher
 - Fully customizable color schemes
-
-See the [Beautiful Jekyll Next documentation](https://github.com/LizardByte/beautiful-jekyll-next) for more details on customizing your site's appearance.
