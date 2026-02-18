@@ -65,7 +65,7 @@ Use the dropdowns below to preview different themes and find your favorites.
     Dynamically discover all theme files and group them by directory
     {% endcomment %}
     {% assign all_theme_files = site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/'" | where_exp: "file", "file.extname == '.css'" | sort: "path" %}
-    
+
     {% comment %}Build a list of unique directories{% endcomment %}
     {% assign directories = "" | split: "" %}
     {% for file in all_theme_files %}
@@ -82,10 +82,10 @@ Use the dropdowns below to preview different themes and find your favorites.
         {% endunless %}
       {% endif %}
     {% endfor %}
-    
+
     {% comment %}Sort directories to show root first{% endcomment %}
     {% assign sorted_dirs = directories | sort %}
-    
+
     {% comment %}Loop through each directory and create optgroups{% endcomment %}
     {% for dir in sorted_dirs %}
       {% if dir == "_root" %}
@@ -95,7 +95,7 @@ Use the dropdowns below to preview different themes and find your favorites.
         {% assign label = dir | replace: "-", " " | replace: "_", " " | capitalize %}
         {% assign dir_path = dir | append: "/" %}
       {% endif %}
-      
+
       <optgroup label="{{ label }}">
         {% for file in all_theme_files %}
           {% assign file_dir = "" %}
@@ -108,7 +108,7 @@ Use the dropdowns below to preview different themes and find your favorites.
               {% assign file_dir = "_root" %}
             {% endif %}
           {% endif %}
-          
+
           {% if file_dir == dir %}
             {% assign theme_name = file.name | remove: ".css" %}
             {% assign theme_value = dir_path | append: theme_name %}
@@ -348,7 +348,7 @@ WHERE username = 'john_doe';
     css = css.replace(/(^|[^-\w])\.highlight\s+/g, '$1html body .highlight ');
 
     // Add !important to all color, background-color, font-weight, and font-style properties
-    css = css.replace(/\b(color|background-color|background|font-weight|font-style|border)\s*:\s*([^;}]+?)(\s*;|\s*})/gi, 
+    css = css.replace(/\b(color|background-color|background|font-weight|font-style|border)\s*:\s*([^;}]+?)(\s*;|\s*})/gi,
       function(match, property, value, ending) {
         // Don't add !important if it's already there
         if (value.trim().endsWith('!important')) {
@@ -365,48 +365,48 @@ WHERE username = 'john_doe';
   async function loadTheme(themePath) {
     try {
       // Update config value display
-      const isLight = !themePath.includes('dark') && !themePath.includes('night') && 
+      const isLight = !themePath.includes('dark') && !themePath.includes('night') &&
                      !themePath.includes('monokai') && !themePath.includes('dracula');
       const configKey = isLight ? 'pygments-theme-light' : 'pygments-theme-dark';
       configValue.textContent = `${configKey}: "${themePath}"`;
-      
+
       // Fetch the CSS file
       const response = await fetch(`{{ "/assets/css/pygment_highlights/" | relative_url }}${themePath}.css`);
       if (!response.ok) {
         throw new Error(`Failed to load theme: ${response.status}`);
       }
-      
+
       let css = await response.text();
-      
+
       // Wrap with high specificity selectors and add !important
       css = wrapWithHighSpecificity(css);
-      
+
       // Remove existing theme style
       const existingStyle = document.getElementById('dynamic-theme-style');
       if (existingStyle) {
         existingStyle.remove();
       }
-      
+
       // Create and inject new style element
       const styleElement = document.createElement('style');
       styleElement.id = 'dynamic-theme-style';
       styleElement.textContent = css;
       styleContainer.appendChild(styleElement);
-      
+
       // Store selection in localStorage
       localStorage.setItem('showcase-theme', themePath);
-      
+
     } catch (error) {
       console.error('Error loading theme:', error);
       configValue.textContent = 'Error loading theme. Please try another.';
     }
   }
-  
+
   // Event listener for theme selection
   themeSelect.addEventListener('change', function() {
     loadTheme(this.value);
   });
-  
+
   // Load saved theme or default on page load
   const savedTheme = localStorage.getItem('showcase-theme');
   if (savedTheme) {
