@@ -61,24 +61,62 @@ Use the dropdowns below to preview different themes and find your favorites.
 <div class="theme-selector">
   <label for="theme-select">Select a Pygments Theme:</label>
   <select id="theme-select">
-    <optgroup label="Custom Themes">
-      <option value="beautiful-jekyll-og">beautiful-jekyll-og (default light)</option>
-      <option value="claude-dark">claude-dark (default dark)</option>
-    </optgroup>
-    <optgroup label="Standard Pygments Themes">
-      {% assign pygments_files = site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/pygments/'" | where_exp: "file", "file.extname == '.css'" | sort: "name" %}
-      {% for file in pygments_files %}
-      {% assign theme = file.name | remove: ".css" %}
-      <option value="pygments/{{ theme }}">{{ theme }}</option>
-      {% endfor %}
-    </optgroup>
-    <optgroup label="Modern Style Themes">
-      {% assign styles_files = site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/pygments-styles/'" | where_exp: "file", "file.extname == '.css'" | sort: "name" %}
-      {% for file in styles_files %}
-      {% assign theme = file.name | remove: ".css" %}
-      <option value="pygments-styles/{{ theme }}">{{ theme }}</option>
-      {% endfor %}
-    </optgroup>
+    {% comment %}
+    Dynamically discover all theme files and group them by directory
+    {% endcomment %}
+    {% assign all_theme_files = site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/'" | where_exp: "file", "file.extname == '.css'" | sort: "path" %}
+    
+    {% comment %}Build a list of unique directories{% endcomment %}
+    {% assign directories = "" | split: "" %}
+    {% for file in all_theme_files %}
+      {% assign path_parts = file.path | split: "/pygment_highlights/" %}
+      {% if path_parts[1] %}
+        {% assign dir_and_file = path_parts[1] | split: "/" %}
+        {% if dir_and_file.size > 1 %}
+          {% assign dir = dir_and_file[0] %}
+        {% else %}
+          {% assign dir = "root" %}
+        {% endif %}
+        {% unless directories contains dir %}
+          {% assign directories = directories | push: dir %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+    
+    {% comment %}Sort directories to show root first{% endcomment %}
+    {% assign sorted_dirs = directories | sort %}
+    
+    {% comment %}Loop through each directory and create optgroups{% endcomment %}
+    {% for dir in sorted_dirs %}
+      {% if dir == "root" %}
+        {% assign label = "Custom Themes" %}
+        {% assign dir_path = "" %}
+      {% else %}
+        {% assign label = dir | replace: "-", " " | replace: "_", " " | capitalize %}
+        {% assign dir_path = dir | append: "/" %}
+      {% endif %}
+      
+      <optgroup label="{{ label }}">
+        {% for file in all_theme_files %}
+          {% assign file_dir = "" %}
+          {% assign path_parts = file.path | split: "/pygment_highlights/" %}
+          {% if path_parts[1] %}
+            {% assign dir_and_file = path_parts[1] | split: "/" %}
+            {% if dir_and_file.size > 1 %}
+              {% assign file_dir = dir_and_file[0] %}
+            {% else %}
+              {% assign file_dir = "root" %}
+            {% endif %}
+          {% endif %}
+          
+          {% if file_dir == dir %}
+            {% assign theme_name = file.name | remove: ".css" %}
+            {% assign theme_value = dir_path | append: theme_name %}
+            <option value="{{ theme_value }}">{{ theme_name }}</option>
+          {% endif %}
+        {% endfor %}
+      </optgroup>
+    {% endfor %}
   </select>
 
   <div class="theme-info">
@@ -435,12 +473,8 @@ pygments-theme-dark: "pygments/nord"
 ## Tips
 
 - **Use the dropdown above** to instantly preview any theme with the code samples
-- Your selection is saved automatically and will persist when you revisit this page
 - The "Config value" box shows you the exact line to add to your `_config.yml`
 - Use the **theme switcher button** in the navbar to toggle between light and dark site themes
-- Most themes work well for either light or dark mode, but some are optimized for one or the other
-- Theme names with "dark", "night", or "monokai" in them are typically better for dark mode
-- Themes without "dark" in the name usually work better for light mode
 
 ## How to Apply a Theme
 
@@ -455,7 +489,7 @@ Once you've found a theme you like:
 ## More Information
 
 - Total themes available: **{{ site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/'" | where_exp: "file", "file.extname == '.css'" | size | plus: 2 }}+**
-- All themes generated using [Pygments](https://pygments.org/)
+- All themes are generated using [Pygments](https://pygments.org/)
 - Compatible with Beautiful Jekyll Next's theme switcher
 - Fully customizable color schemes
 
