@@ -166,6 +166,21 @@ theme-switcher: true
 # Theme switcher style: 'button' (default, cycles through themes on click) or 'dropdown' (shows menu with all options)
 theme-switcher-style: 'button'
 
+# Pygments syntax highlighting themes
+# Light theme: used for light mode (default: beautiful-jekyll-og)
+# Available options in pygment_highlights folder:
+#   - beautiful-jekyll-og (default Beautiful Jekyll theme)
+# Or choose from pygments subfolder (e.g., "pygments/github-dark")
+# Or choose from pygments-styles subfolder (e.g., "pygments-styles/github-light-default")
+pygments-theme-light: "beautiful-jekyll-og"
+
+# Dark theme: used for dark mode (default: beautiful-jekyll-og)
+# Available options in pygment_highlights folder:
+#   - beautiful-jekyll-og (default Beautiful Jekyll theme)
+# Or choose from pygments subfolder (e.g., "pygments/dracula")
+# Or choose from pygments-styles subfolder (e.g., "pygments-styles/github-dark-dimmed")
+pygments-theme-dark: "beautiful-jekyll-og"
+
 # Light theme colors
 page-col: "#ffffff"
 text-col: "#404040"

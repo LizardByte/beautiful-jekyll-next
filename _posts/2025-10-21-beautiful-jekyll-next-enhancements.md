@@ -73,6 +73,38 @@ dark-footer-link-col: "#e0e0e0"
 dark-footer-hover-col: "#66b3ff"
 ```
 
+### Customizing Syntax Highlighting
+
+You can choose from dozens of Pygments themes for code syntax highlighting. Configure separate themes for light and dark modes:
+
+```yaml
+# Light theme syntax highlighting (default: beautiful-jekyll-og)
+pygments-theme-light: "beautiful-jekyll-og"
+
+# Dark theme syntax highlighting (default: beautiful-jekyll-og)
+pygments-theme-dark: "beautiful-jekyll-og"
+```
+
+**Popular combinations:**
+
+GitHub style:
+```yaml
+pygments-theme-light: "pygments-styles/github-light-default"
+pygments-theme-dark: "pygments-styles/github-dark-dimmed"
+```
+
+VS Code style:
+```yaml
+pygments-theme-light: "pygments-styles/light-plus"
+pygments-theme-dark: "pygments-styles/dark-plus"
+```
+
+Gruvbox style:
+```yaml
+pygments-theme-light: "pygments/gruvbox-light"
+pygments-theme-dark: "pygments/gruvbox-dark"
+```
+
 ### How It Works
 
 - The theme switcher button appears in the navigation bar
