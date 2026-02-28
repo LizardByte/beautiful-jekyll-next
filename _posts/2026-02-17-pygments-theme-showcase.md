@@ -68,61 +68,27 @@ specific contexts and may appear differently when the page is built with your cu
   <label for="theme-select">Select a Pygments Theme:</label>
   <select id="theme-select">
     {% comment %}
-    Dynamically discover all theme files and group them by directory
+    Themes are listed from _includes/pygment_highlights/ (not static files,
+    so they cannot be discovered dynamically via site.static_files).
     {% endcomment %}
-    {% assign all_theme_files = site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/'" | where_exp: "file", "file.extname == '.css'" | sort: "path" %}
 
-    {% comment %}Build a list of unique directories{% endcomment %}
-    {% assign directories = "" | split: "" %}
-    {% for file in all_theme_files %}
-      {% assign path_parts = file.path | split: "/pygment_highlights/" %}
-      {% if path_parts[1] %}
-        {% assign dir_and_file = path_parts[1] | split: "/" %}
-        {% if dir_and_file.size > 1 %}
-          {% assign dir = dir_and_file[0] %}
-        {% else %}
-          {% assign dir = "_root" %}
-        {% endif %}
-        {% unless directories contains dir %}
-          {% assign directories = directories | push: dir %}
-        {% endunless %}
-      {% endif %}
-    {% endfor %}
+    <optgroup label="Custom Themes">
+      <option value="beautiful-jekyll-og">beautiful-jekyll-og</option>
+    </optgroup>
 
-    {% comment %}Sort directories to show root first{% endcomment %}
-    {% assign sorted_dirs = directories | sort %}
+    <optgroup label="Pygments">
+      {% assign pygments_themes = "abap,algol,algol_nu,arduino,autumn,borland,bw,coffee,colorful,default,dracula,emacs,friendly,friendly_grayscale,fruity,github-dark,gruvbox-dark,gruvbox-light,igor,inkpot,lightbulb,lovelace,manni,material,monokai,murphy,native,nord-darker,nord,one-dark,paraiso-dark,paraiso-light,pastie,perldoc,rainbow_dash,rrt,sas,solarized-dark,solarized-light,staroffice,stata-dark,stata-light,tango,trac,vim,vs,xcode,zenburn" | split: "," %}
+      {% for theme in pygments_themes %}
+        <option value="pygments/{{ theme }}">{{ theme }}</option>
+      {% endfor %}
+    </optgroup>
 
-    {% comment %}Loop through each directory and create optgroups{% endcomment %}
-    {% for dir in sorted_dirs %}
-      {% if dir == "_root" %}
-        {% assign label = "Custom Themes" %}
-        {% assign dir_path = "" %}
-      {% else %}
-        {% assign label = dir | replace: "-", " " | replace: "_", " " | capitalize %}
-        {% assign dir_path = dir | append: "/" %}
-      {% endif %}
-
-      <optgroup label="{{ label }}">
-        {% for file in all_theme_files %}
-          {% assign file_dir = "" %}
-          {% assign path_parts = file.path | split: "/pygment_highlights/" %}
-          {% if path_parts[1] %}
-            {% assign dir_and_file = path_parts[1] | split: "/" %}
-            {% if dir_and_file.size > 1 %}
-              {% assign file_dir = dir_and_file[0] %}
-            {% else %}
-              {% assign file_dir = "_root" %}
-            {% endif %}
-          {% endif %}
-
-          {% if file_dir == dir %}
-            {% assign theme_name = file.name | remove: ".css" %}
-            {% assign theme_value = dir_path | append: theme_name %}
-            <option value="{{ theme_value }}">{{ theme_name }}</option>
-          {% endif %}
-        {% endfor %}
-      </optgroup>
-    {% endfor %}
+    <optgroup label="Pygments styles">
+      {% assign pygments_styles_themes = "andromeeda,aurora-x,ayu-dark,ayu-light,ayu-mirage,catppuccin-frappe,catppuccin-latte,catppuccin-macchiato,catppuccin-mocha,dark-plus,everforest-dark,everforest-light,github-dark-default,github-dark-dimmed,github-dark-high-contrast,github-light-default,github-light-high-contrast,gruvbox-dark-hard,gruvbox-dark-medium,gruvbox-dark-soft,gruvbox-light-hard,gruvbox-light-medium,gruvbox-light-soft,laserwave-high-contrast,laserwave,light-plus,min-dark,min-light,one-dark-pro,one-light,plastic" | split: "," %}
+      {% for theme in pygments_styles_themes %}
+        <option value="pygments-styles/{{ theme }}">{{ theme }}</option>
+      {% endfor %}
+    </optgroup>
   </select>
 
   <div class="theme-info">
@@ -335,6 +301,7 @@ WHERE username = 'john_doe';
 ```
 
 
+<script src="{{ '/assets/css/pygment-themes-data.js' | relative_url }}"></script>
 <script>
 (function() {
   const themeSelect = document.getElementById('theme-select');
@@ -371,19 +338,21 @@ WHERE username = 'john_doe';
   }
 
   // Function to load and apply a theme
-  async function loadTheme(themePath) {
+  function loadTheme(themePath) {
     try {
       // Update both config value displays
       configValueLight.textContent = `pygments-theme-light: "${themePath}"`;
       configValueDark.textContent = `pygments-theme-dark: "${themePath}"`;
 
-      // Fetch the CSS file
-      const response = await fetch(`{{ "/assets/css/pygment_highlights/" | relative_url }}${themePath}.css`);
-      if (!response.ok) {
-        throw new Error(`Failed to load theme: ${response.status}`);
-      }
+      // Look up the CSS from the preloaded theme data
+      const themes = window.pygmentThemesData || {};
+      let css = themes[themePath];
 
-      let css = await response.text();
+      if (!css) {
+        configValueLight.textContent = 'Theme not found. Please try another.';
+        configValueDark.textContent = 'Theme not found. Please try another.';
+        return;
+      }
 
       // Wrap with high specificity selectors and add !important
       css = wrapWithHighSpecificity(css);
@@ -496,7 +465,7 @@ Once you've found a theme you like:
 
 ## More Information
 
-- Total themes available: **{{ site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/'" | where_exp: "file", "file.extname == '.css'" | size | plus: 2 }}+**
+- Total themes available: **80+**
 - All themes are generated using [Pygments](https://pygments.org/)
 - Many additional themes provided by [Pygments Styles](https://pygments-styles.org/)
 - Compatible with Beautiful Jekyll Next's theme switcher
