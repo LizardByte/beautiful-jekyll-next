@@ -68,27 +68,46 @@ specific contexts and may appear differently when the page is built with your cu
   <label for="theme-select">Select a Pygments Theme:</label>
   <select id="theme-select">
     {% comment %}
-    Themes are listed from _includes/pygment_highlights/ (not static files,
-    so they cannot be discovered dynamically via site.static_files).
+    Themes are sourced from _data/pygment_themes.yml, which lists all available themes
+    from _includes/pygment_highlights/. They are grouped by directory prefix.
     {% endcomment %}
 
-    <optgroup label="Custom Themes">
-      <option value="beautiful-jekyll-og">beautiful-jekyll-og</option>
-    </optgroup>
+    {% comment %}Build a sorted list of unique group prefixes{% endcomment %}
+    {% assign groups = "" | split: "" %}
+    {% for theme in site.data.pygment_themes %}
+      {% assign parts = theme | split: "/" %}
+      {% if parts.size > 1 %}
+        {% assign group = parts[0] %}
+      {% else %}
+        {% assign group = "_root" %}
+      {% endif %}
+      {% unless groups contains group %}
+        {% assign groups = groups | push: group %}
+      {% endunless %}
+    {% endfor %}
 
-    <optgroup label="Pygments">
-      {% assign pygments_themes = "abap,algol,algol_nu,arduino,autumn,borland,bw,coffee,colorful,default,dracula,emacs,friendly,friendly_grayscale,fruity,github-dark,gruvbox-dark,gruvbox-light,igor,inkpot,lightbulb,lovelace,manni,material,monokai,murphy,native,nord-darker,nord,one-dark,paraiso-dark,paraiso-light,pastie,perldoc,rainbow_dash,rrt,sas,solarized-dark,solarized-light,staroffice,stata-dark,stata-light,tango,trac,vim,vs,xcode,zenburn" | split: "," %}
-      {% for theme in pygments_themes %}
-        <option value="pygments/{{ theme }}">{{ theme }}</option>
-      {% endfor %}
-    </optgroup>
-
-    <optgroup label="Pygments styles">
-      {% assign pygments_styles_themes = "andromeeda,aurora-x,ayu-dark,ayu-light,ayu-mirage,catppuccin-frappe,catppuccin-latte,catppuccin-macchiato,catppuccin-mocha,dark-plus,everforest-dark,everforest-light,github-dark-default,github-dark-dimmed,github-dark-high-contrast,github-light-default,github-light-high-contrast,gruvbox-dark-hard,gruvbox-dark-medium,gruvbox-dark-soft,gruvbox-light-hard,gruvbox-light-medium,gruvbox-light-soft,laserwave-high-contrast,laserwave,light-plus,min-dark,min-light,one-dark-pro,one-light,plastic" | split: "," %}
-      {% for theme in pygments_styles_themes %}
-        <option value="pygments-styles/{{ theme }}">{{ theme }}</option>
-      {% endfor %}
-    </optgroup>
+    {% for group in groups %}
+      {% if group == "_root" %}
+        {% assign label = "Custom Themes" %}
+      {% else %}
+        {% assign label = group | replace: "-", " " | replace: "_", " " | capitalize %}
+      {% endif %}
+      <optgroup label="{{ label }}">
+        {% for theme in site.data.pygment_themes %}
+          {% assign parts = theme | split: "/" %}
+          {% if parts.size > 1 %}
+            {% assign theme_group = parts[0] %}
+            {% assign theme_name = parts | last %}
+          {% else %}
+            {% assign theme_group = "_root" %}
+            {% assign theme_name = theme %}
+          {% endif %}
+          {% if theme_group == group %}
+            <option value="{{ theme }}">{{ theme_name }}</option>
+          {% endif %}
+        {% endfor %}
+      </optgroup>
+    {% endfor %}
   </select>
 
   <div class="theme-info">
@@ -465,7 +484,7 @@ Once you've found a theme you like:
 
 ## More Information
 
-- Total themes available: **80+**
+- Total themes available: **{{ site.data.pygment_themes | size }}+**
 - All themes are generated using [Pygments](https://pygments.org/)
 - Many additional themes provided by [Pygments Styles](https://pygments-styles.org/)
 - Compatible with Beautiful Jekyll Next's theme switcher
