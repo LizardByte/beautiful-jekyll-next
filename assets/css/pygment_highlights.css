@@ -7,10 +7,10 @@ layout: null
 
 /* Light theme syntax highlighting: {{ light_theme }} */
 {% capture light_theme_path %}pygment_highlights/{{ light_theme }}.css{% endcapture %}
-{% include_relative {{ light_theme_path }} %}
+{% include {{ light_theme_path }} %}
 
 /* Dark theme syntax highlighting: {{ dark_theme }} */
 {% capture dark_theme_path %}pygment_highlights/{{ dark_theme }}.css{% endcapture %}
 [data-bs-theme="dark"] {
-{% include_relative {{ dark_theme_path }} %}
+{% include {{ dark_theme_path }} %}
 }

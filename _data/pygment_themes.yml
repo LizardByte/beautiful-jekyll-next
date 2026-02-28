@@ -1,0 +1,89 @@
+---
+# List of all available Pygments syntax highlighting themes.
+# These correspond to CSS files in _includes/pygment_highlights/.
+# Used by:
+#   - assets/css/pygment-themes-data.js (showcase interactive preview)
+#   - _posts/2026-02-17-pygments-theme-showcase.md (dropdown)
+
+- beautiful-jekyll-og
+
+- pygments/abap
+- pygments/algol
+- pygments/algol_nu
+- pygments/arduino
+- pygments/autumn
+- pygments/borland
+- pygments/bw
+- pygments/coffee
+- pygments/colorful
+- pygments/default
+- pygments/dracula
+- pygments/emacs
+- pygments/friendly
+- pygments/friendly_grayscale
+- pygments/fruity
+- pygments/github-dark
+- pygments/gruvbox-dark
+- pygments/gruvbox-light
+- pygments/igor
+- pygments/inkpot
+- pygments/lightbulb
+- pygments/lovelace
+- pygments/manni
+- pygments/material
+- pygments/monokai
+- pygments/murphy
+- pygments/native
+- pygments/nord-darker
+- pygments/nord
+- pygments/one-dark
+- pygments/paraiso-dark
+- pygments/paraiso-light
+- pygments/pastie
+- pygments/perldoc
+- pygments/rainbow_dash
+- pygments/rrt
+- pygments/sas
+- pygments/solarized-dark
+- pygments/solarized-light
+- pygments/staroffice
+- pygments/stata-dark
+- pygments/stata-light
+- pygments/tango
+- pygments/trac
+- pygments/vim
+- pygments/vs
+- pygments/xcode
+- pygments/zenburn
+
+- pygments-styles/andromeeda
+- pygments-styles/aurora-x
+- pygments-styles/ayu-dark
+- pygments-styles/ayu-light
+- pygments-styles/ayu-mirage
+- pygments-styles/catppuccin-frappe
+- pygments-styles/catppuccin-latte
+- pygments-styles/catppuccin-macchiato
+- pygments-styles/catppuccin-mocha
+- pygments-styles/dark-plus
+- pygments-styles/everforest-dark
+- pygments-styles/everforest-light
+- pygments-styles/github-dark-default
+- pygments-styles/github-dark-dimmed
+- pygments-styles/github-dark-high-contrast
+- pygments-styles/github-light-default
+- pygments-styles/github-light-high-contrast
+- pygments-styles/gruvbox-dark-hard
+- pygments-styles/gruvbox-dark-medium
+- pygments-styles/gruvbox-dark-soft
+- pygments-styles/gruvbox-light-hard
+- pygments-styles/gruvbox-light-medium
+- pygments-styles/gruvbox-light-soft
+- pygments-styles/laserwave-high-contrast
+- pygments-styles/laserwave
+- pygments-styles/light-plus
+- pygments-styles/min-dark
+- pygments-styles/min-light
+- pygments-styles/one-dark-pro
+- pygments-styles/one-light
+- pygments-styles/plastic

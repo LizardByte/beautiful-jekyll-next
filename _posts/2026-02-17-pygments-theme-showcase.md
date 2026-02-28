@@ -68,57 +68,42 @@ specific contexts and may appear differently when the page is built with your cu
   <label for="theme-select">Select a Pygments Theme:</label>
   <select id="theme-select">
     {% comment %}
-    Dynamically discover all theme files and group them by directory
+    Themes are sourced from _data/pygment_themes.yml, which lists all available themes
+    from _includes/pygment_highlights/. They are grouped by directory prefix.
     {% endcomment %}
-    {% assign all_theme_files = site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/'" | where_exp: "file", "file.extname == '.css'" | sort: "path" %}
 
-    {% comment %}Build a list of unique directories{% endcomment %}
-    {% assign directories = "" | split: "" %}
-    {% for file in all_theme_files %}
-      {% assign path_parts = file.path | split: "/pygment_highlights/" %}
-      {% if path_parts[1] %}
-        {% assign dir_and_file = path_parts[1] | split: "/" %}
-        {% if dir_and_file.size > 1 %}
-          {% assign dir = dir_and_file[0] %}
-        {% else %}
-          {% assign dir = "_root" %}
-        {% endif %}
-        {% unless directories contains dir %}
-          {% assign directories = directories | push: dir %}
-        {% endunless %}
+    {% comment %}Build a sorted list of unique group prefixes{% endcomment %}
+    {% assign groups = "" | split: "" %}
+    {% for theme in site.data.pygment_themes %}
+      {% assign parts = theme | split: "/" %}
+      {% if parts.size > 1 %}
+        {% assign group = parts[0] %}
+      {% else %}
+        {% assign group = "_root" %}
       {% endif %}
+      {% unless groups contains group %}
+        {% assign groups = groups | push: group %}
+      {% endunless %}
     {% endfor %}
 
-    {% comment %}Sort directories to show root first{% endcomment %}
-    {% assign sorted_dirs = directories | sort %}
-
-    {% comment %}Loop through each directory and create optgroups{% endcomment %}
-    {% for dir in sorted_dirs %}
-      {% if dir == "_root" %}
+    {% for group in groups %}
+      {% if group == "_root" %}
         {% assign label = "Custom Themes" %}
-        {% assign dir_path = "" %}
       {% else %}
-        {% assign label = dir | replace: "-", " " | replace: "_", " " | capitalize %}
-        {% assign dir_path = dir | append: "/" %}
+        {% assign label = group | replace: "-", " " | replace: "_", " " | capitalize %}
       {% endif %}
-
       <optgroup label="{{ label }}">
-        {% for file in all_theme_files %}
-          {% assign file_dir = "" %}
-          {% assign path_parts = file.path | split: "/pygment_highlights/" %}
-          {% if path_parts[1] %}
-            {% assign dir_and_file = path_parts[1] | split: "/" %}
-            {% if dir_and_file.size > 1 %}
-              {% assign file_dir = dir_and_file[0] %}
-            {% else %}
-              {% assign file_dir = "_root" %}
-            {% endif %}
+        {% for theme in site.data.pygment_themes %}
+          {% assign parts = theme | split: "/" %}
+          {% if parts.size > 1 %}
+            {% assign theme_group = parts[0] %}
+            {% assign theme_name = parts | last %}
+          {% else %}
+            {% assign theme_group = "_root" %}
+            {% assign theme_name = theme %}
           {% endif %}
-
-          {% if file_dir == dir %}
-            {% assign theme_name = file.name | remove: ".css" %}
-            {% assign theme_value = dir_path | append: theme_name %}
-            <option value="{{ theme_value }}">{{ theme_name }}</option>
+          {% if theme_group == group %}
+            <option value="{{ theme }}">{{ theme_name }}</option>
           {% endif %}
         {% endfor %}
       </optgroup>
@@ -335,6 +320,7 @@ WHERE username = 'john_doe';
 ```
 
 
+<script src="{{ '/assets/css/pygment-themes-data.js' | relative_url }}"></script>
 <script>
 (function() {
   const themeSelect = document.getElementById('theme-select');
@@ -371,19 +357,21 @@ WHERE username = 'john_doe';
   }
 
   // Function to load and apply a theme
-  async function loadTheme(themePath) {
+  function loadTheme(themePath) {
     try {
       // Update both config value displays
       configValueLight.textContent = `pygments-theme-light: "${themePath}"`;
       configValueDark.textContent = `pygments-theme-dark: "${themePath}"`;
 
-      // Fetch the CSS file
-      const response = await fetch(`{{ "/assets/css/pygment_highlights/" | relative_url }}${themePath}.css`);
-      if (!response.ok) {
-        throw new Error(`Failed to load theme: ${response.status}`);
-      }
+      // Look up the CSS from the preloaded theme data
+      const themes = window.pygmentThemesData || {};
+      let css = themes[themePath];
 
-      let css = await response.text();
+      if (!css) {
+        configValueLight.textContent = 'Theme not found. Please try another.';
+        configValueDark.textContent = 'Theme not found. Please try another.';
+        return;
+      }
 
       // Wrap with high specificity selectors and add !important
       css = wrapWithHighSpecificity(css);
@@ -496,7 +484,7 @@ Once you've found a theme you like:
 
 ## More Information
 
-- Total themes available: **{{ site.static_files | where_exp: "file", "file.path contains '/pygment_highlights/'" | where_exp: "file", "file.extname == '.css'" | size | plus: 2 }}+**
+- Total themes available: **{{ site.data.pygment_themes | size }}+**
 - All themes are generated using [Pygments](https://pygments.org/)
 - Many additional themes provided by [Pygments Styles](https://pygments-styles.org/)
 - Compatible with Beautiful Jekyll Next's theme switcher
