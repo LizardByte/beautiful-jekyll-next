@@ -95,7 +95,7 @@ rss-description: This website is a virtual proof that I'm awesome
 # The links can be customized by supplying your own `./_data/amazon_products.yml` file.
 amazon_products:
   enabled: true
-  affiliate_tag: 'lizardbyte-beautiful-jekyll-next-20'
+  affiliate_tag: 'lizardbyte-beautiful-jekyll-next-01-20'
 
 # Select a badge style to show in posts
 # valid choices are:
