@@ -2,7 +2,7 @@
 <!-- Google Analytics -->
 {% unless site.gtag %}
 <div id="bj-ganalytics-deprecated-msg" style="position: fixed; background: #b90404; bottom: 0; width: 100%; z-index: 10000; color: #f0f0f0; text-align: center; padding: 0.5rem;">
-  <div title="Close" onclick="$(this).parent().remove()" style="position: absolute; right: 5px; top: 0; font-size: 1.5em; line-height: 1; cursor: pointer;">&times;</div>
+  <button id="bj-ganalytics-deprecated-close" type="button" title="Close" aria-label="Close Google Analytics deprecation message" style="position: absolute; right: 5px; top: 0; font-size: 1.5em; line-height: 1; cursor: pointer; color: inherit; background: transparent; border: 0; padding: 0;">&times;</button>
   <div style="max-width: 800px; margin: auto; font-size: 1.1em;">
     This website is using outdated Google Analytics
     <details style="font-size: 0.8em;">
@@ -11,14 +11,27 @@
     </details>
   </div>
 </div>
+<script>
+  document.getElementById('bj-ganalytics-deprecated-close').addEventListener('click', function () {
+    document.getElementById('bj-ganalytics-deprecated-msg').remove();
+  });
+</script>
 {% endunless %}
 <script>
-  (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+  (function (globalContext, documentContext, tagName, sourceUrl, analyticsName) {
+    globalContext.GoogleAnalyticsObject = analyticsName;
+    globalContext[analyticsName] = globalContext[analyticsName] || function () {
+      globalContext[analyticsName].q = globalContext[analyticsName].q || [];
+      globalContext[analyticsName].q.push(arguments);
+    };
+    globalContext[analyticsName].l = Date.now();
+
+    const scriptElement = documentContext.createElement(tagName);
+    const firstScript = documentContext.getElementsByTagName(tagName)[0];
+    scriptElement.async = true;
+    scriptElement.src = sourceUrl;
+    firstScript.parentNode.insertBefore(scriptElement, firstScript);
+  })(globalThis, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
   ga('create', '{{ site.google_analytics }}', 'auto');
   ga('send', 'pageview');
 </script>

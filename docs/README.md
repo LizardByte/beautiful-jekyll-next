@@ -36,6 +36,7 @@ For a full list of differences, see https://github.com/daattali/beautiful-jekyll
 
 - [Features](#features)
 - [Usage](#usage)
+- [Development](#development)
 - [Add your own content](#add-your-own-content)
 - [Customizing parameters for each page](#customizing-parameters-for-each-page)
 - [Supported parameters](#supported-parameters)
@@ -79,6 +80,39 @@ remote_theme: LizardByte/beautiful-jekyll-next
 ## Specific branch, commit, or tag
 ```yaml
 remote_theme: LizardByte/beautiful-jekyll-next@master
+```
+
+# Development
+
+## Updating `Gemfile.lock`
+
+`Gemfile.lock` records the exact Ruby gem versions used by this project.
+Regenerate it after changing `Gemfile` or `beautiful-jekyll-next-theme.gemspec`, and commit the lockfile with that change.
+
+If Ruby 3.3 and Bundler are installed locally, run:
+
+```shell
+bundle lock --add-platform ruby x86_64-linux arm64-darwin x86_64-darwin x64-mingw-ucrt x64-mingw32 x86-mingw32
+bundle install
+```
+
+If Ruby is not installed locally, use Docker from the repository root:
+
+```powershell
+docker run --rm -v "${PWD}:/app" -w /app ruby:3.3 bundle lock --add-platform ruby x86_64-linux arm64-darwin x86_64-darwin x64-mingw-ucrt x64-mingw32 x86-mingw32
+```
+
+Do not edit `Gemfile.lock` by hand.
+After updating it, verify that the site still builds:
+
+```shell
+bundle exec jekyll build --future --config _config.yml
+```
+
+When using Docker-only verification, run the install and build in the same container:
+
+```powershell
+docker run --rm -v "${PWD}:/app" -w /app ruby:3.3 sh -lc "bundle install && JEKYLL_ENV=production bundle exec jekyll build --future --config _config.yml"
 ```
 
 # Add your own content

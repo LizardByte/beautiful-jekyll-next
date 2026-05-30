@@ -10,7 +10,7 @@ common-ext-js:
 ---
 
 <!DOCTYPE html>
-<html lang="{{ page.language | default: site.language | default: 'en' }}">
+<html lang="{{ page.language | default: site.language | default: 'en' }}">  <!-- //NOSONAR(Web:PageWithoutTitleCheck): _includes/head.html renders the page title. -->
 
   {% include head.html %}
 

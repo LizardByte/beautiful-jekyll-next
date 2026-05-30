@@ -16,8 +16,8 @@
         {%- for link in site.navbar-links -%}
           {%- if link[1].first %}
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ link[0] }}</a>
-              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <button class="nav-link dropdown-toggle" id="navbarDropdown{{ forloop.index }}" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ link[0] }}</button>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown{{ forloop.index }}">
                 {%- for childlink in link[1] -%}
                   {%- for linkparts in childlink %}
                     <a class="dropdown-item" href="{{ linkparts[1] | relative_url }}">{{ linkparts[0] }}</a>
