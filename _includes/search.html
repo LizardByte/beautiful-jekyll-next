@@ -5,13 +5,16 @@
   <div id="nav-search-exit" title="Exit search">✕</div>
   <input type="text" id="nav-search-input" placeholder="Search">
   <ul id="search-results-container"></ul>
-  
-  <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.9.2/simple-jekyll-search.min.js"
+    integrity="sha384-UN+lyciv8Ta643YxZ9sY2tdTSmk3KE61Qq84ZIXG9NRTbD9+NFXy38m9h6Exxx3n"
+    crossorigin="anonymous"></script>
   <script>
     SimpleJekyllSearch({
       searchInput: document.getElementById('nav-search-input'),
       resultsContainer: document.getElementById('search-results-container'),
-      json: '{{ site.baseurl }}/assets/data/searchcorpus.json' 
+      json: '{{ site.baseurl }}/assets/data/searchcorpus.json'
     });
   </script>
 </div>

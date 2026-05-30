@@ -1,6 +1,7 @@
 {% if site.utterances.repository and site.utterances.issue-term  %}
 
-<script src="https://utteranc.es/client.js"
+<!-- //NOSONAR(Web:S5725): utterances serves this widget endpoint without immutable SRI-compatible releases. --><script
+        src="https://utteranc.es/client.js"
         repo="{{ site.utterances.repository }}"
         issue-term="{{ site.utterances.issue-term }}"
         theme="{{ site.utterances.theme}}"
@@ -10,4 +11,3 @@
 </script>
 
 {% endif %}
-

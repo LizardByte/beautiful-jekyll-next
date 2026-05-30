@@ -67,7 +67,7 @@
     <!-- End new comment form -->
     <!-- Load reCaptcha if site key is set -->
     {% if site.staticman.reCaptcha.siteKey %}
-      <script async src="https://www.google.com/recaptcha/api.js"></script>
+      <script async src="https://www.google.com/recaptcha/api.js"></script> <!-- //NOSONAR(Web:S5725): reCAPTCHA is a live Google service script and is not published as an immutable SRI-compatible asset. -->
     {% endif %}
   </div>
 
