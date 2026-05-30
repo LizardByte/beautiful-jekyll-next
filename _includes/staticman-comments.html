@@ -24,20 +24,20 @@
       <form id="new_comment" class="page__comments-form js-form form" method="post">
         <div class="form-group">
           <label for="comment-form-message">{{ site.data.ui-text[site.locale].comment_form_comment_label | default: "Comment" }} <small class="required">*</small></label><br>
-          <textarea type="text" rows="12" cols="36" id="comment-form-message" name="fields[message]" tabindex="1"></textarea>
+          <textarea type="text" rows="12" cols="36" id="comment-form-message" name="fields[message]"></textarea>
           <div class="small form-text"><a href="https://daringfireball.net/projects/markdown/">{{ site.data.ui-text[site.locale].comment_form_md_info | default: "Markdown is supported." }}</a></div>
         </div>
         <div class="form-group">
           <label for="comment-form-name">{{ site.data.ui-text[site.locale].comment_form_name_label | default: "Name" }} <small class="required">*</small></label>
-          <input type="text" id="comment-form-name" name="fields[name]" tabindex="2" />
+          <input type="text" id="comment-form-name" name="fields[name]" />
         </div>
         <div class="form-group">
           <label for="comment-form-email">{{ site.data.ui-text[site.locale].comment_form_email_label | default: "Email address" }} <small class="required">*</small></label>
-          <input type="email" id="comment-form-email" name="fields[email]" tabindex="3" />
+          <input type="email" id="comment-form-email" name="fields[email]" />
         </div>
         <div class="form-group">
           <label for="comment-form-url">{{ site.data.ui-text[site.locale].comment_form_website_label | default: "Website (optional)" }}</label>
-          <input type="url" id="comment-form-url" name="fields[url]" tabindex="4"/>
+          <input type="url" id="comment-form-url" name="fields[url]"/>
         </div>
         <div class="form-group d-none" style="display: none;">
           <input type="hidden" name="options[origin]" value="{{ page.url | absolute_url }}">
@@ -59,8 +59,8 @@
           </div>
         {% endif %}
         <div class="form-group">
-          <button type="submit" id="comment-form-submit" tabindex="5" class="btn btn-primary btn-lg">{{ site.data.ui-text[site.locale].comment_btn_submit | default: "Submit Comment" }}</button>
-          <button type="submit" id="comment-form-submitted" tabindex="5" class="btn btn-primary btn-lg d-none" disabled>{{ site.data.ui-text[site.locale].comment_btn_submitted | default: "Submitted" }}</button>
+          <button type="submit" id="comment-form-submit" class="btn btn-primary btn-lg">{{ site.data.ui-text[site.locale].comment_btn_submit | default: "Submit Comment" }}</button>
+          <button type="submit" id="comment-form-submitted" class="btn btn-primary btn-lg d-none" disabled>{{ site.data.ui-text[site.locale].comment_btn_submitted | default: "Submitted" }}</button>
         </div>
       </form>
     </div>
