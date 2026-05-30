@@ -1,7 +1,7 @@
 {% if site.commentbox %}
 
     <div class="commentbox"></div>
-    <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+    <script src="https://unpkg.com/commentbox.io@2.1.0/dist/commentBox.min.js"></script> <!-- //NOSONAR(Web:S5725): commentbox.io is not available on cdnjs, and unpkg does not expose Renovate-maintained SRI. -->
     <script>commentBox('{{ site.commentbox }}')</script>
 
 {% endif %}

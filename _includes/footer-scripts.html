@@ -12,7 +12,11 @@
 
 {% if site.site-js %}
   {% for js in site.site-js %}
-    <script src="{{ js | relative_url }}"></script>
+    {% if js.href %}
+      {% include ext-js.html js=js %}
+    {% else %}
+      <script src="{{ js | relative_url }}"></script>
+    {% endif %}
   {% endfor %}
 {% endif %}
 

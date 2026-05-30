@@ -217,12 +217,17 @@ dark-footer-hover-col: "#66b3ff"
 # mobile-theme-col: "#0085A1"
 
 # For any extra visual customization, you can include additional CSS files in every page on your site.
-# List any custom CSS files here
+# List any custom CSS files here. External CSS files using SRI can be specified with href and sri.
 # site-css:
+#   - href: "https://example.com/custom-styles.css"
+#     sri: "sha384-..."
 #   - "/assets/css/custom-styles.css"
 
-# If you have common JavaScript files that should be included in every page, list them here
+# If you have common JavaScript files that should be included in every page, list them here.
+# External JavaScript files using SRI can be specified with href and sri.
 # site-js:
+#   - href: "https://example.com/custom-script.js"
+#     sri: "sha384-..."
 #   - "/assets/js/custom-script.js"
 
 #################################

@@ -85,7 +85,11 @@
 
   {% if site.site-css %}
     {% for css in site.site-css %}
-      <link rel="stylesheet" href="{{ css | relative_url }}">
+      {% if css.href %}
+        {% include ext-css.html css=css %}
+      {% else %}
+        <link rel="stylesheet" href="{{ css | relative_url }}">
+      {% endif %}
     {% endfor %}
   {% endif %}
 
