@@ -48,3 +48,28 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
+
+  release:
+    if: github.event_name == 'push'
+    permissions:
+      contents: write  # needed for setup-release-action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Release
+        id: setup-release
+        uses: LizardByte/actions/actions/release_setup@25babf9f2e9f088145ba488339c78c4df9394fc7  # v2026.524.145234
+        with:
+          github_token: ${{ secrets.GH_BOT_TOKEN }}
+
+      - name: Create Release
+        uses: LizardByte/actions/actions/release_create@25babf9f2e9f088145ba488339c78c4df9394fc7  # v2026.524.145234
+        with:
+          allowUpdates: false
+          artifacts: ''
+          body: ${{ steps.setup-release.outputs.release_body }}
+          draft: true
+          generateReleaseNotes: ${{ steps.setup-release.outputs.release_generate_release_notes }}
+          name: ${{ steps.setup-release.outputs.release_tag }}
+          prerelease: true
+          tag: ${{ steps.setup-release.outputs.release_tag }}
+          token: ${{ secrets.GH_BOT_TOKEN }}
