@@ -1,6 +1,6 @@
 {% if page.mathjax %}
 <script type="text/javascript">
-  let MathJax = {
+  globalThis.MathJax = {
     options: {
       skipHtmlTags: [
         'script', 'noscript', 'style', 'textarea', 'pre', 'code'
@@ -11,8 +11,8 @@
 <script
   type="text/javascript"
   async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-  integrity="sha384-vi9R4hb1goLJPJDHY+dOmXxcY3HGv6tJIwHxy5JunOTxJGHbsSuubPgl++SNxYYi"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.0.0/tex-mml-chtml.min.js"
+  integrity="sha384-C47sRPScRU8gCduybGUtOI2tuihkr9LFvlaIsWq+uu6bC6oxDSFgf97DSI+xWklw"
   crossorigin="anonymous"
 ></script>
 {% endif %}
