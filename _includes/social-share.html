@@ -8,13 +8,13 @@
 
 {% if any-share-links %}
 <section id = "social-share-section">
-  <span class="sr-only">Share: </span>
+  <span class="visually-hidden">Share: </span>
 
   {% if site.share-links-active.twitter %}
     <a href="https://twitter.com/intent/tweet?text={{ page.title | strip_html | url_encode }}&url={{ page.url | absolute_url | url_encode }}"
       class="btn btn-social-icon btn-twitter" title="Share on X (Twitter)">
       <span class="fab fa-fw fa-x-twitter" aria-hidden="true"></span>
-      <span class="sr-only">X (Twitter)</span>
+      <span class="visually-hidden">X (Twitter)</span>
     </a>
   {% endif %}
 
@@ -22,7 +22,7 @@
     <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}"
       class="btn btn-social-icon btn-facebook" title="Share on Facebook">
       <span class="fab fa-fw fa-facebook" aria-hidden="true"></span>
-      <span class="sr-only">Facebook</span>
+      <span class="visually-hidden">Facebook</span>
     </a>
   {% endif %}
 
@@ -30,7 +30,7 @@
     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | url_encode }}"
       class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
       <span class="fab fa-fw fa-linkedin" aria-hidden="true"></span>
-      <span class="sr-only">LinkedIn</span>
+      <span class="visually-hidden">LinkedIn</span>
     </a>
   {% endif %}
 
@@ -38,7 +38,7 @@
     <a href="https://vk.com/share.php?url={{ page.url | absolute_url | url_encode }}"
       class="btn btn-social-icon btn-vk" title="Share on VK">
       <span class="fab fa-fw fa-vk" aria-hidden="true"></span>
-      <span class="sr-only">VK</span>
+      <span class="visually-hidden">VK</span>
     </a>
   {% endif %}
 
@@ -46,7 +46,7 @@
     <a href="https://www.reddit.com/submit?url={{ page.url | absolute_url | url_encode }}"
       class="btn btn-social-icon btn-reddit" title="Share on Reddit">
       <span class="fab fa-fw fa-reddit" aria-hidden="true"></span>
-      <span class="sr-only">Reddit</span>
+      <span class="visually-hidden">Reddit</span>
     </a>
   {% endif %}
 
