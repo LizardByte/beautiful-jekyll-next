@@ -27,6 +27,14 @@ let BeautifulJekyllJS = {
       navbar.classList.remove("top-nav-expanded");
     });
 
+    // On mobile, collapse the navbar after selecting a menu item
+    document.querySelectorAll('#main-navbar a:not(.dropdown-toggle)').forEach(function(navbarLink) {
+      navbarLink.addEventListener('click', function() {
+        const navbarMenu = document.getElementById('main-navbar');
+        bootstrap.Collapse.getOrCreateInstance(navbarMenu, { toggle: false }).hide();
+      });
+    });
+
     // show the big header image
     BeautifulJekyllJS.initImgs();
 
