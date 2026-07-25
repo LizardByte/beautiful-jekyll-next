@@ -1,12 +1,17 @@
 <div align="center">
-  <img src="banner.png" />
+  <img
+    src="banner.png"
+    alt="Beautiful Jekyll Next banner"
+    height="256"
+  />
   <h1 align="center">Beautiful Jekyll Next</h1>
-  <h4 align="center">Create a beautiful website.</h4>
+  <h4 align="center">Build a beautiful and simple website in literally minutes.</h4>
 </div>
 
 <div align="center">
   <a href="https://github.com/LizardByte/beautiful-jekyll-next"><img src="https://img.shields.io/github/stars/lizardbyte/beautiful-jekyll-next.svg?logo=github&style=for-the-badge" alt="GitHub stars"></a>
   <a href="https://github.com/LizardByte/beautiful-jekyll-next/actions/workflows/ci.yml?query=branch%3Amaster"><img src="https://img.shields.io/github/actions/workflow/status/lizardbyte/beautiful-jekyll-next/ci.yml.svg?branch=master&label=CI%20build&logo=github&style=for-the-badge" alt="GitHub Workflow Status (CI)"></a>
+  <a href="https://sonarcloud.io/project/overview?id=LizardByte_beautiful-jekyll-next"><img src="https://img.shields.io/sonar/quality_gate/LizardByte_beautiful-jekyll-next.svg?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarqubecloud&label=sonarcloud" alt="SonarCloud"></a>
 </div>
 
 ## Demos:
