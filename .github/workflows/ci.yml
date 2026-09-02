@@ -28,7 +28,11 @@ jobs:
           ruby-version: '3.3'
 
       - name: Install dependencies
-        run: bundle install && bundle exec appraisal install
+        run: |
+          bundle config set --local path "${RUNNER_TEMP}/bundle"
+          bundle install --deployment
+          bundle config unset --local deployment
+          bundle exec appraisal install
 
       - name: Setup Pages
         id: configure-pages
