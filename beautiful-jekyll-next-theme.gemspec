@@ -23,6 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "webrick", "~> 1.8"
 
   spec.add_development_dependency "bundler", ">= 1.16"
-  spec.add_development_dependency "rake", "~> 12.0"
+  spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "appraisal", "~> 2.5"
 end
